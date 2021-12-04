@@ -3,66 +3,75 @@ import 'package:flutter/painting.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:website/data/website_sponsors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:website/homepage/current_event.dart';
 
 class SponsorList extends StatelessWidget {
-  const SponsorList({Key? key, this.color = Colors.red}) : super(key: key);
+  const SponsorList({
+    Key? key,
+    this.sponsors = const [],
+    this.color = Colors.red,
+    this.size = 1,
+  }) : super(key: key);
+  final List<CurrentEventSponsor> sponsors;
   final Color color;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
-    return websiteSponsors.isNotEmpty
+    return sponsors.isNotEmpty
         ? Padding(
             padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.h),
-            child: Column(
+            child: Wrap(
+              spacing: 2.w,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: Text(
-                    "Soft Skills Academy 7 Sponsors:",
-                    style: TextStyle(
-                      color: Colors.purple,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 4.w,
-                    ),
-                  ),
-                ),
-                Wrap(
-                  spacing: 2.w,
-                  children: [
-                    for (int i = 0; i < websiteSponsors.length; i++)
-                      Container(
-                        width: 25.h,
-                        child: Column(
+                for (int i = 0; i < sponsors.length; i++)
+                  Container(
+                    width: 25.h,
+                    child: Column(
+                      children: [
+                        TextButton(
+                          onPressed: () async {
+                            final link = sponsors[i].link;
+                            if (link == null) {
+                              return;
+                            }
+                            if (await canLaunch(link)) {
+                              await launch(link);
+                            } else {
+                              throw "Could not launch $link";
+                            }
+                          },
+                          child: Image.asset(
+                            "assets/sponsors/${sponsors[i].image}",
+                            height: size * 30.h,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextButton(
-                              onPressed: () async {
-                                if (await canLaunch(websiteSponsors[i].link)) {
-                                  await launch(websiteSponsors[i].link);
-                                } else {
-                                  throw "Could not launch ${websiteSponsors[i].link}";
-                                }
-                              },
-                              child: websiteSponsors[i].logo,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.star, color: color)),
-                                IconButton(
-                                    onPressed: () {},
+                            for (int j = 0; j < sponsors[i].stars; j++)
+                              Icon(Icons.star, color: color),
+                            sponsors[i].desc != null
+                                ? IconButton(
+                                    onPressed: () async {
+                                      await showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              content: Text(sponsors[i].desc!),
+                                            );
+                                          });
+                                    },
                                     icon: const Icon(
                                       Icons.info,
                                       color: Colors.grey,
-                                    )),
-                              ],
-                            )
+                                    ))
+                                : const SizedBox.shrink(),
                           ],
-                        ),
-                      )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  )
               ],
             ),
           )

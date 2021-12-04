@@ -11,7 +11,7 @@ class TextImage extends StatelessWidget {
     required this.image,
     this.reversed = false,
   }) : super(key: key);
-  final String text;
+  final List<TextSpan> text;
   final String title;
   final String image;
   final bool reversed;
@@ -50,11 +50,13 @@ class TextImage extends StatelessWidget {
             Align(
               alignment:
                   reversed ? Alignment.bottomRight : Alignment.centerLeft,
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 2.w,
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 2.w,
+                  ),
+                  children: text,
                 ),
               ),
             ),
@@ -63,10 +65,13 @@ class TextImage extends StatelessWidget {
       ),
       Responsive.isMobile(context)
           ? const SizedBox.shrink()
-          : Image(
-              height: 200,
-              width: 200,
-              image: AssetImage(image),
+          : Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image(
+                height: 200,
+                width: 200,
+                image: AssetImage(image),
+              ),
             ),
     ];
     if (reversed == true) {

@@ -28,7 +28,7 @@ class FaqContainer extends StatelessWidget {
         ),
         children: [
           Text(
-            faq.question,
+            faq.answer,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 1.9.w),
           )
         ],
