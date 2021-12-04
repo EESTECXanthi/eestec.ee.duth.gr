@@ -11,8 +11,6 @@ import 'dart:math';
 import 'footer.dart';
 import 'text_image.dart';
 
-const imagesNumber = 7;
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -26,12 +24,14 @@ class HomePage extends StatelessWidget {
           Stack(
             children: [
               CarouselSlider(
-                items: [
-                  for (int i = 0; i < imagesNumber; i++)
-                    Image.asset(
-                      "assets/slider/$i.jpg",
-                      fit: BoxFit.fitWidth,
-                    ),
+                items: const [
+                  _Image(image: "0"),
+                  _Image(image: "1"),
+                  _Image(image: "2"),
+                  _Image(image: "3"),
+                  _Image(image: "4"),
+                  _Image(image: "5"),
+                  _Image(image: "6"),
                 ],
                 options: CarouselOptions(
                   scrollPhysics: const NeverScrollableScrollPhysics(),
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                       Colors.red,
                     ],
                   ),
-                  size: Size(MediaQuery.of(context).size.width, 15.h),
+                  size: Size(MediaQuery.of(context).size.width, 22.h),
                 ),
               ),
             ],
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
                     Colors.red,
                   ],
                 ),
-                size: Size(MediaQuery.of(context).size.width, 2.h),
+                size: Size(MediaQuery.of(context).size.width, 1.h),
               )),
           const TextImage(
             text: [
@@ -83,9 +83,9 @@ class HomePage extends StatelessWidget {
               TextSpan(text: "udents’ "),
               TextSpan(
                   text: 'E', style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: "uropean asso "),
+              TextSpan(text: "uropean asso"),
               TextSpan(
-                  text: 'C ', style: TextStyle(fontWeight: FontWeight.bold)),
+                  text: 'C', style: TextStyle(fontWeight: FontWeight.bold)),
               TextSpan(
                   text:
                       'iation (EESTEC) είναι ένας μη πολιτικός, μη κυβερνητικός και μη κερδοσκοπικός πανευρωπαϊκός οργανισμός φοιτητών στο πεδίο του ηλεκτρολόγου μηχανικού. Η EESTEC απαρτίζεται από τοπικές επιτροπές σε όλη την Ευρώπη, ένα εκ των οποίων αποτελεί η '),
@@ -117,6 +117,25 @@ class HomePage extends StatelessWidget {
           const CurrentEvent(),
           const Footer(),
         ],
+      ),
+    );
+  }
+}
+
+class _Image extends StatelessWidget {
+  const _Image({Key? key, required this.image}) : super(key: key);
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      //height: 100,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage("assets/slider/$image.jpg"),
+        ),
       ),
     );
   }

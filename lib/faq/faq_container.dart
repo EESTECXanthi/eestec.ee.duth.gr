@@ -23,13 +23,15 @@ class FaqContainer extends StatelessWidget {
         ),
         title: Text(
           faq.question,
-          style: TextStyle(
-              color: Colors.red, fontWeight: FontWeight.bold, fontSize: 2.w),
+          style: TextStyle(color: Colors.red, fontSize: 2.w),
         ),
         children: [
-          Text(
-            faq.answer,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 1.9.w),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              faq.answer,
+              style: TextStyle(fontSize: 1.7.w),
+            ),
           )
         ],
       ),

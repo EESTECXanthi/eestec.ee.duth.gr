@@ -32,9 +32,10 @@ class TextImage extends StatelessWidget {
                 title,
                 textAlign: TextAlign.end,
                 style: TextStyle(
+                  fontFamily: "Roboto",
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
-                  fontSize: Responsive.isMobile(context) ? 6.w : 3.w,
+                  fontSize: Responsive.isMobile(context) ? 5.w : 3.w,
                 ),
               ),
             ),
