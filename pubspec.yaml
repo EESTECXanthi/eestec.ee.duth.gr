@@ -21,6 +21,7 @@ dependencies:
   wave: ^0.2.0
   timelines:
   markdown: ^4.0.1
+  google_fonts:
   flutter:
     sdk: flutter
 

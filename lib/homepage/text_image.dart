@@ -32,10 +32,9 @@ class TextImage extends StatelessWidget {
                 title,
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontFamily: "Roboto",
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
-                  fontSize: Responsive.isMobile(context) ? 5.w : 3.w,
+                  fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
                 ),
               ),
             ),
@@ -55,7 +54,7 @@ class TextImage extends StatelessWidget {
                 text: TextSpan(
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 2.w,
+                    fontSize: Responsive.isMobile(context) ? 5.w : 2.w,
                   ),
                   children: text,
                 ),

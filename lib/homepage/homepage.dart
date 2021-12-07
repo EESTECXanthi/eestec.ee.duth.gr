@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                   text:
                       ". Η Τ.Ε. Ξάνθης ιδρύθηκε το 2010 και υπάρχουν περισσότερα από 80 ενεργά μέλη-φοιτητές του Δημοκρίτειου Πανεπιστημίου Θράκης."),
             ],
-            title: "Who are we?",
+            title: "WHO ARE WE",
             image: "assets/homepage/0.jpg",
             reversed: false,
           ),
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
                   text:
                       ' είναι να δημιουργήσει, να προωθήσει και να αναπτύξει διεθνείς επαφές και ανταλλαγή ιδεών μεταξύ φοιτητών. Η αποστολή της οργάνωσης είναι η ανάπτυξη των μελών τοσο ακαδημαϊκα όσο και επαγγελματικά.'),
             ],
-            title: "Our goal",
+            title: "OUR GOAL",
             image: "assets/homepage/1.jpg",
             reversed: true,
           ),
@@ -128,15 +128,21 @@ class _Image extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      //height: 100,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage("assets/slider/$image.jpg"),
-        ),
-      ),
+    return Image.asset(
+      "assets/slider/$image.jpg",
+      fit: BoxFit.cover,
+      height: double.infinity,
+      width: double.infinity,
     );
+    // return Container(
+    //   width: MediaQuery.of(context).size.width,
+    //   //height: 100,
+    //   decoration: BoxDecoration(
+    //     image: DecorationImage(
+    //       fit: BoxFit.cover,
+    //       image: AssetImage("assets/slider/$image.jpg"),
+    //     ),
+    //   ),
+    // );
   }
 }

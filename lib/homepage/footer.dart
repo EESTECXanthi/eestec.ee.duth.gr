@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:website/responsive.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sizer/sizer.dart';
@@ -35,21 +36,71 @@ class Footer extends StatelessWidget {
             Wrap(
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (await canLaunch(
+                          "https://www.instagram.com/eestec_lc_xanthi/")) {
+                        await launch(
+                            "https://www.instagram.com/eestec_lc_xanthi/");
+                      } else {
+                        throw "Could not launch instagram";
+                      }
+                    },
                     icon: const Icon(
                       MdiIcons.instagram,
                       color: Colors.white,
                     )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (await canLaunch(
+                          "https://www.facebook.com/eesteclcxanthi/")) {
+                        await launch(
+                            "https://www.facebook.com/eesteclcxanthi/");
+                      } else {
+                        throw "Could not launch facebook";
+                      }
+                    },
                     icon: const Icon(
                       MdiIcons.facebook,
                       color: Colors.white,
                     )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (await canLaunch(
+                          "https://www.linkedin.com/company/eesteclcxanthi/")) {
+                        await launch(
+                            "https://www.linkedin.com/company/eesteclcxanthi/");
+                      } else {
+                        throw "Could not launch linkedin";
+                      }
+                    },
                     icon: const Icon(
                       MdiIcons.linkedin,
+                      color: Colors.white,
+                    )),
+                IconButton(
+                    onPressed: () async {
+                      if (await canLaunch(
+                          "https://www.youtube.com/channel/UC_8gbN7BrNbd_GSdkDH83jw")) {
+                        await launch(
+                            "https://www.youtube.com/channel/UC_8gbN7BrNbd_GSdkDH83jw");
+                      } else {
+                        throw "Could not launch youtube";
+                      }
+                    },
+                    icon: const Icon(
+                      MdiIcons.youtube,
+                      color: Colors.white,
+                    )),
+                IconButton(
+                    onPressed: () async {
+                      if (await canLaunch("https://github.com/EESTECXanthi")) {
+                        await launch("https://github.com/EESTECXanthi");
+                      } else {
+                        throw "Could not launch github";
+                      }
+                    },
+                    icon: const Icon(
+                      MdiIcons.github,
                       color: Colors.white,
                     )),
                 IconButton(

@@ -43,7 +43,7 @@ class EventContainer extends StatelessWidget {
                   style: TextStyle(
                     color: category.color,
                     fontWeight: FontWeight.bold,
-                    fontSize: 3.w,
+                    fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
                   ),
                 ),
               )),
@@ -57,7 +57,7 @@ class EventContainer extends StatelessWidget {
                   category.desc,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 1.5.w,
+                    fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,
                   ),
                 ),
               ),

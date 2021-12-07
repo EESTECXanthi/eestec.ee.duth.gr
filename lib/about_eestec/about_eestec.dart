@@ -16,16 +16,18 @@ class AboutEestec extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Navigation(
-        child: Column(
+        child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-              child: Text(
-                "About EESTEC",
-                style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 3.w,
-                    fontWeight: FontWeight.bold),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                child: Text(
+                  "About EESTEC",
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Divider(
@@ -44,7 +46,7 @@ class AboutEestec extends StatelessWidget {
                     child: Text(
                       "Η EESTEC (Electrical Engineering STudent’s European assoCiation) αποτελεί έναν μη πολιτικό και μη κερδοσκοπικό οργανισμό φοιτητών Ηλεκτρολόγων Μηχανικών και όχι μόνο. Ο οργανισμός ιδρύθηκε στο Delft, το 1986. Η EESTEC αποσκοπεί στην ανάπτυξη διεθνών επαφών μεταξύ ευρωπαίων φοιτητών, δίνοντας τους την ευκαιρία να εξελιχθούν σε ακαδημαϊκό, επαγγελματικό και κοινωνικό επίπεδο. Η EESTEC έχει παραρτήματα σε 24 χώρες και συνεργάζεται με 54 πανεπιστήμια από όλη την Ευρώπη.Ως διεθνής οργανισμός, η EESTEC αποτελείται από International Teams και Projects, στα οποία συμμετέχουν φοιτητές από όλη την Ευρώπη. Εδώ  μπορείτε να βρείτε παραπάνω πληροφορίες για την διεθνή πλευρά της EESTEC",
                       style: TextStyle(
-                        fontSize: 1.5.w,
+                        fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,
                       ),
                     ),
                   ),
@@ -62,8 +64,8 @@ class AboutEestec extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.h),
-              child: TextButton(
+              padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
+              child: ElevatedButton(
                 onPressed: () async {
                   if (await canLaunch("https://eestec.net/about")) {
                     await launch("https://eestec.net/about");
@@ -71,9 +73,16 @@ class AboutEestec extends StatelessWidget {
                     throw "Could not launch https://eestec.net/about";
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
                 child: Text(
                   "Μάθετε περισσότερα",
-                  style: TextStyle(fontSize: 2.w),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: Responsive.isMobile(context) ? 5.w : 2.w),
                 ),
               ),
             )

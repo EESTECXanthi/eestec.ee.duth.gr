@@ -31,7 +31,7 @@ class EventPage extends StatelessWidget {
               return DotIndicator(
                 size: 7.w,
                 color: categories[index].color,
-                child: Image.asset("assets/misc/ssa.png"),
+                child: Image.asset("assets/misc/${categories[index].image}"),
               );
             },
             connectorBuilder: (_, index, type) => DecoratedLineConnector(

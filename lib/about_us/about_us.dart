@@ -1,6 +1,8 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 import 'package:sizer/sizer.dart';
+import 'package:website/responsive.dart';
 
 import '../navigation.dart';
 
@@ -25,21 +27,45 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: annualTeams.length,
-      child: Navigation(
-        bottom: TabBar(
-          isScrollable: true,
-          tabs: annualTeams.keys
-              .map<Widget>((e) => Padding(
-                  child: Text(e),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w)))
-              .toList(),
-        ),
-        child: VerticalTabBarView(
-            children:
-                annualTeams.values.map<Widget>((e) => Text("d")).toList()),
-      ),
-    );
+        length: annualTeams.length,
+        child: Navigation(
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: annualTeams.keys
+                .map<Widget>((e) => Padding(
+                    child: Text(e),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w)))
+                .toList(),
+          ),
+          child: VerticalTabBarView(
+            children: annualTeams.keys
+                .map<Widget>((e) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(children: [
+                        Text(e,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize:
+                                    Responsive.isMobile(context) ? 7.w : 3.w)),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: DottedLine(
+                            lineThickness: 0.5.w,
+                            dashLength: 1.w,
+                            dashGapLength: 1.w,
+                            lineLength: 90.w,
+                            dashColor: Colors.red,
+                          ),
+                        ),
+                        Text(annualTeams[e] ?? "",
+                            style: TextStyle(
+                                fontSize:
+                                    Responsive.isMobile(context) ? 4.w : 2.w)),
+                      ]),
+                    ))
+                .toList(),
+          ),
+        ));
   }
 }
