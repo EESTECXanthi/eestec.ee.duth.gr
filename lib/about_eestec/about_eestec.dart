@@ -50,16 +50,16 @@ class AboutEestec extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Responsive.isMobile(context)
-                      ? const SizedBox.shrink()
-                      : SizedBox(width: 10.w),
-                  Responsive.isMobile(context)
-                      ? const SizedBox.shrink()
-                      : Container(
-                          width: 20.w,
-                          height: 20.w,
-                          color: Colors.red,
-                        )
+                  // Responsive.isMobile(context)
+                  //     ? const SizedBox.shrink()
+                  //     : SizedBox(width: 10.w),
+                  // Responsive.isMobile(context)
+                  //     ? const SizedBox.shrink()
+                  //     : Container(
+                  //         width: 20.w,
+                  //         height: 20.w,
+                  //         color: Colors.red,
+                  //       )
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,9 +42,31 @@ class SponsorList extends StatelessWidget {
                               throw "Could not launch $link";
                             }
                           },
-                          child: Image.asset(
+                          child: ExtendedImage.asset(
                             "assets/sponsors/${sponsors[i].image}",
-                            height: size * 30.h,
+                            //fit: BoxFit.cover,
+                            enableMemoryCache: true,
+                            cacheRawData: true,
+                            loadStateChanged: (ExtendedImageState state) {
+                              switch (state.extendedImageLoadState) {
+                                case LoadState.loading:
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                case LoadState.completed:
+                                  return ExtendedRawImage(
+                                    image: state.extendedImageInfo?.image,
+                                    height: size * 30.h,
+                                  );
+                                case LoadState.failed:
+                                  return GestureDetector(
+                                    child:
+                                        const Center(child: Icon(Icons.error)),
+                                    onTap: () {
+                                      state.reLoadImage();
+                                    },
+                                  );
+                              }
+                            },
                           ),
                         ),
                         Row(

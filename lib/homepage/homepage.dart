@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:wave/config.dart';
@@ -7,6 +8,7 @@ import 'package:website/navigation.dart';
 import 'package:wave/wave.dart';
 import 'package:sizer/sizer.dart';
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'footer.dart';
 import 'text_image.dart';
@@ -128,12 +130,41 @@ class _Image extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    return ExtendedImage.asset(
       "assets/slider/$image.jpg",
-      fit: BoxFit.cover,
-      height: double.infinity,
-      width: double.infinity,
+      enableMemoryCache: true,
+      cacheRawData: true,
+      loadStateChanged: (ExtendedImageState state) {
+        switch (state.extendedImageLoadState) {
+          case LoadState.loading:
+            return const Center(child: CircularProgressIndicator());
+          case LoadState.completed:
+            return ExtendedRawImage(
+              image: state.extendedImageInfo?.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            );
+          case LoadState.failed:
+            return GestureDetector(
+              child: const Center(child: Icon(Icons.error)),
+              onTap: () {
+                state.reLoadImage();
+              },
+            );
+        }
+      },
     );
+    // return Image(
+    //   //imageUrl: "http://eestec.ee.duth.gr/assets/assets/slider/$image.jpg",
+    //   image: UiImage(),
+    //   fit: BoxFit.cover,
+    //   height: double.infinity,
+    //   width: double.infinity,
+    //   placeholder: (context, url) => const CircularProgressIndicator(),
+    //   errorWidget: (context, url, error) => const Icon(Icons.error),
+    // );
+
     // return Container(
     //   width: MediaQuery.of(context).size.width,
     //   //height: 100,

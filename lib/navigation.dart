@@ -82,7 +82,7 @@ class Navigation extends StatelessWidget {
         toolbarHeight: 16.h,
         title: SafeArea(
           child: GestureDetector(
-            onTap: () => _Action.pushEvent(context, const HomePage()),
+            onTap: () => _Action.pushEvent(context, HomePage()),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 6.h),
               child: Image.asset(
@@ -164,7 +164,7 @@ PreferredSize appBar(BuildContext context, {required List<Widget> actions}) {
           child: Row(
             children: [
               GestureDetector(
-                onTap: () => _Action.pushEvent(context, const HomePage()),
+                onTap: () => _Action.pushEvent(context, HomePage()),
                 child: Image.asset(
                   "assets/misc/logo.png",
                   filterQuality: FilterQuality.none,

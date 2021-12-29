@@ -63,16 +63,16 @@ class TextImage extends StatelessWidget {
           ],
         ),
       ),
-      Responsive.isMobile(context)
-          ? const SizedBox.shrink()
-          : Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Image(
-                height: 200,
-                width: 200,
-                image: AssetImage(image),
-              ),
-            ),
+      // Responsive.isMobile(context)
+      //     ? const SizedBox.shrink()
+      //     : Padding(
+      //         padding: const EdgeInsets.all(20.0),
+      //         child: Image(
+      //           height: 200,
+      //           width: 200,
+      //           image: AssetImage(image),
+      //         ),
+      //       ),
     ];
     if (reversed == true) {
       list = list.reversed.toList();

@@ -52,7 +52,7 @@ class EventContainer extends StatelessWidget {
                 lineThickness: 2,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(25.0),
                 child: Text(
                   category.desc,
                   style: TextStyle(

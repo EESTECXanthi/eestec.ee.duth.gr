@@ -61,7 +61,7 @@ class AboutUs extends StatelessWidget {
                         Text(annualTeams[e] ?? "",
                             style: TextStyle(
                                 fontSize:
-                                    Responsive.isMobile(context) ? 4.w : 2.w)),
+                                    Responsive.isMobile(context) ? 5.w : 2.w)),
                       ]),
                     ))
                 .toList(),
