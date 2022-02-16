@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 import 'package:website/events/event_catergory.dart';
@@ -31,7 +32,9 @@ class EventPage extends StatelessWidget {
               return DotIndicator(
                 size: 7.w,
                 color: categories[index].color,
-                child: Image.asset("assets/misc/${categories[index].image}"),
+                child: ExtendedImage.asset(
+                    "assets/misc/${categories[index].image}",
+                    filterQuality: FilterQuality.high),
               );
             },
             connectorBuilder: (_, index, type) => DecoratedLineConnector(

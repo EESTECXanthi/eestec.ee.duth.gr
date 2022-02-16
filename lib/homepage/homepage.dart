@@ -1,12 +1,17 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wave/config.dart';
+import 'package:website/faq/faq.dart';
+import 'package:website/faq/faq_container.dart';
+import 'package:website/faq/faq_model.dart';
 import 'package:website/homepage/current_event.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:website/navigation.dart';
 import 'package:wave/wave.dart';
 import 'package:sizer/sizer.dart';
+import 'package:website/responsive.dart';
 import 'dart:math';
 import 'dart:ui' as ui;
 
@@ -20,44 +25,53 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Navigation(
       floatingActionButton: FloatingActionButton(
-          onPressed: () {}, child: const Icon(Icons.message)),
+          onPressed: () async {
+            if (await canLaunch(
+                "https://www.facebook.com/messages/t/554449414607675")) {
+              await launch(
+                  "https://www.facebook.com/messages/t/554449414607675");
+            } else {
+              throw "Could not launch messanger";
+            }
+          },
+          child: const Icon(Icons.message)),
       child: ListView(
         children: [
-          Stack(
-            children: [
-              CarouselSlider(
-                items: const [
-                  _Image(image: "0"),
-                  _Image(image: "1"),
-                  _Image(image: "2"),
-                  _Image(image: "3"),
-                  _Image(image: "4"),
-                  _Image(image: "5"),
-                  _Image(image: "6"),
-                ],
-                options: CarouselOptions(
-                  scrollPhysics: const NeverScrollableScrollPhysics(),
-                  autoPlay: true,
-                  viewportFraction: 1,
-                  height: MediaQuery.of(context).size.height,
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: WaveWidget(
-                  config: CustomConfig(
-                    durations: [35000, 19440],
-                    heightPercentages: [0.20, 0.23],
-                    colors: [
-                      Colors.redAccent,
-                      Colors.red,
-                    ],
-                  ),
-                  size: Size(MediaQuery.of(context).size.width, 22.h),
-                ),
-              ),
-            ],
-          ),
+          // Stack(
+          //   children: [
+          //     CarouselSlider(
+          //       items: const [
+          //         _Image(image: "0"),
+          //         _Image(image: "1"),
+          //         _Image(image: "2"),
+          //         _Image(image: "3"),
+          //         _Image(image: "4"),
+          //         _Image(image: "5"),
+          //         _Image(image: "6"),
+          //       ],
+          //       options: CarouselOptions(
+          //         scrollPhysics: const NeverScrollableScrollPhysics(),
+          //         autoPlay: true,
+          //         viewportFraction: 1,
+          //         height: MediaQuery.of(context).size.height,
+          //       ),
+          //     ),
+          //     Positioned(
+          //       bottom: 0,
+          //       child: WaveWidget(
+          //         config: CustomConfig(
+          //           durations: [35000, 19440],
+          //           heightPercentages: [0.20, 0.23],
+          //           colors: [
+          //             Colors.redAccent,
+          //             Colors.red,
+          //           ],
+          //         ),
+          //         size: Size(MediaQuery.of(context).size.width, 22.h),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           Transform.rotate(
               angle: pi,
               child: WaveWidget(
@@ -72,7 +86,7 @@ class HomePage extends StatelessWidget {
                 size: Size(MediaQuery.of(context).size.width, 1.h),
               )),
           const TextImage(
-            text: [
+            greekText: [
               TextSpan(text: "Η "),
               TextSpan(
                   text: 'E', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -98,12 +112,36 @@ class HomePage extends StatelessWidget {
                   text:
                       ". Η Τ.Ε. Ξάνθης ιδρύθηκε το 2010 και υπάρχουν περισσότερα από 80 ενεργά μέλη-φοιτητές του Δημοκρίτειου Πανεπιστημίου Θράκης."),
             ],
-            title: "WHO ARE WE",
+            englishText: [
+              TextSpan(text: "//todo "),
+              TextSpan(
+                  text: 'E', style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: "lectrical "),
+              TextSpan(
+                  text: 'E', style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: "ngineering "),
+              TextSpan(
+                  text: 'ST', style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: "udents’ "),
+              TextSpan(
+                  text: 'E', style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: "uropean asso"),
+              TextSpan(
+                  text: 'C', style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: 'iation (EESTEC) //todo '),
+              TextSpan(
+                  text: 'EESTEC LC Xanthi',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(
+                text: "//todo",
+              )
+            ],
+            greek: "WHO ARE WE",
             image: "assets/homepage/0.jpg",
             reversed: false,
           ),
           const TextImage(
-            text: [
+            greekText: [
               TextSpan(text: "Σκοπός της "),
               TextSpan(
                   text: 'EESTEC',
@@ -112,11 +150,35 @@ class HomePage extends StatelessWidget {
                   text:
                       ' είναι να δημιουργήσει, να προωθήσει και να αναπτύξει διεθνείς επαφές και ανταλλαγή ιδεών μεταξύ φοιτητών. Η αποστολή της οργάνωσης είναι η ανάπτυξη των μελών τοσο ακαδημαϊκα όσο και επαγγελματικά.'),
             ],
-            title: "OUR GOAL",
+            englishText: [
+              TextSpan(text: "//todo "),
+              TextSpan(
+                  text: 'EESTEC',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: "//todo"),
+            ],
+            greek: "OUR GOAL",
             image: "assets/homepage/1.jpg",
             reversed: true,
           ),
           const CurrentEvent(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "FAQ",
+              style: TextStyle(
+                  color: Colors.red,
+                  fontSize: Responsive.isMobile(context) ? 5.w : 3.w),
+            ),
+          ),
+          Divider(
+            thickness: 3,
+            indent: 5,
+            endIndent: 8.w,
+            color: Colors.red,
+          ),
+          for (final faq in faqs) FaqContainer(faq: faq),
+          const SizedBox(height: 30),
           const Footer(),
         ],
       ),

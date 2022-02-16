@@ -3,6 +3,8 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:timelines/timelines.dart';
+import 'package:website/responsive.dart';
+import 'package:website/widgets/lang_changer.dart';
 
 import 'faq_model.dart';
 
@@ -19,18 +21,23 @@ class FaqContainer extends StatelessWidget {
         leading: Icon(
           Icons.arrow_forward,
           color: Colors.red,
-          size: 2.w,
+          size: Responsive.isMobile(context) ? 5.w : 2.w,
         ),
-        title: Text(
-          faq.question,
-          style: TextStyle(color: Colors.red, fontSize: 2.w),
+        title: LangText(
+          greek: faq.question["greek"] ?? "",
+          english: faq.question["english"] ?? "",
+          style: TextStyle(
+              color: Colors.red,
+              fontSize: Responsive.isMobile(context) ? 5.w : 2.w),
         ),
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              faq.answer,
-              style: TextStyle(fontSize: 1.7.w),
+            child: LangText(
+              greek: faq.answer["greek"] ?? "",
+              english: faq.answer["english"] ?? "",
+              style: TextStyle(
+                  fontSize: Responsive.isMobile(context) ? 5.w : 1.7.w),
             ),
           )
         ],

@@ -1,11 +1,16 @@
+import 'package:flag/flag_enum.dart';
+import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:website/about_eestec/about_eestec.dart';
 import 'package:website/about_us/about_us.dart';
+import 'package:website/bloc/lang.dart';
 import 'package:website/faq/faq.dart';
 import 'package:website/homepage/homepage.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'events/event_page.dart';
 
@@ -18,32 +23,55 @@ class Navigation extends StatelessWidget {
   final Widget? floatingActionButton;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  static List<_Action> actions = const [
-    _Action(
-      text: "ABOUT US",
-      push: AboutUs(),
-    ),
-    _Action(
-      text: "About EESTEC",
-      push: AboutEestec(),
-    ),
-    _Action(
-      text: "OUR EVENTS",
-      push: EventPage(),
-    ),
-    _Action(
-      text: "FAQ",
-      push: Faq(),
-    ),
-    _Action(
-      text: "CONTACT US",
-      link:
-          "https://docs.google.com/forms/d/e/1FAIpQLSdLQL0zVm8yfNDMrDtHbD-1d_aqnZazGDXb2RmFf1h2iBxkKw/viewform",
-    ),
-  ];
+  get items => null;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> actions = [
+      const _Action(
+        text: "ABOUT US",
+        push: AboutUs(),
+      ),
+      const _Action(
+        text: "About EESTEC",
+        push: AboutEestec(),
+      ),
+      const _Action(
+        text: "OUR EVENTS",
+        push: EventPage(),
+      ),
+      // _Action(
+      //   text: "FAQ",
+      //   push: Faq(),
+      // ),
+      const _Action(
+        text: "CONTACT US",
+        link:
+            "https://docs.google.com/forms/d/e/1FAIpQLSdLQL0zVm8yfNDMrDtHbD-1d_aqnZazGDXb2RmFf1h2iBxkKw/viewform",
+      ),
+      BlocBuilder<Language, String>(builder: (context, lang) {
+        return Center(
+          child: DropdownButton<String>(
+              hint: lang == "el"
+                  ? Flag.fromCode(FlagsCode.US, height: 1.h, width: 1.w)
+                  : Flag.fromCode(FlagsCode.GR, height: 1.h, width: 1.w),
+              items: [
+                DropdownMenuItem(
+                  child: Flag.fromCode(FlagsCode.BR, height: 1.h, width: 1.w),
+                  value: "en",
+                ),
+                DropdownMenuItem(
+                  child: Flag.fromCode(FlagsCode.GR, height: 1.h, width: 1.w),
+                  value: "el",
+                ),
+              ],
+              onChanged: (val) {
+                if (val != null) context.read<Language>().changeLang(val);
+              }),
+        );
+      }),
+    ];
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: Responsive.isMobile(context)
@@ -122,7 +150,7 @@ class _Action extends StatelessWidget {
         pageBuilder: (BuildContext context, _, __) => push,
         transitionsBuilder: (c, anim, a2, child) =>
             FadeTransition(opacity: anim, child: child),
-        transitionDuration: const Duration(milliseconds: 800),
+        transitionDuration: const Duration(milliseconds: 300),
       ),
     );
   }
@@ -148,7 +176,6 @@ class _Action extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
                 color:
                     Responsive.isMobile(context) ? Colors.red : Colors.white),
           )),
@@ -164,13 +191,15 @@ PreferredSize appBar(BuildContext context, {required List<Widget> actions}) {
           child: Row(
             children: [
               GestureDetector(
-                onTap: () => _Action.pushEvent(context, HomePage()),
-                child: Image.asset(
-                  "assets/misc/logo.png",
-                  filterQuality: FilterQuality.none,
-                  width: 16.w,
-                  fit: BoxFit.contain,
-                ),
+                onTap: () => _Action.pushEvent(context, const HomePage()),
+                child: SvgPicture.asset("assets/misc/logo.svg",
+                    semanticsLabel: 'EESTEC LOGO'),
+                // Image.asset(
+                //   "assets/misc/logo.png",
+                //   filterQuality: FilterQuality.high,
+                //   width: 16.w,
+                //   fit: BoxFit.contain,
+                // ),
               ),
               Expanded(
                 child: Container(),

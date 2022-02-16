@@ -1,9 +1,11 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 import 'package:sizer/sizer.dart';
 import 'package:website/responsive.dart';
+import 'package:website/widgets/lang_changer.dart';
 
 import '../navigation.dart';
 
@@ -20,14 +22,36 @@ class AboutEestec extends StatelessWidget {
           children: [
             Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: Text(
-                  "About EESTEC",
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
-                      fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: ExtendedImage.asset(
+                  "assets/misc/aboutEestec.png",
+                  enableMemoryCache: true,
+                  cacheRawData: true,
+                  loadStateChanged: (ExtendedImageState state) {
+                    switch (state.extendedImageLoadState) {
+                      case LoadState.loading:
+                        return const Center(child: CircularProgressIndicator());
+                      case LoadState.completed:
+                        return ExtendedRawImage(
+                          image: state.extendedImageInfo?.image,
+                        );
+                      case LoadState.failed:
+                        return GestureDetector(
+                          child: const Center(child: Icon(Icons.error)),
+                          onTap: () {
+                            state.reLoadImage();
+                          },
+                        );
+                    }
+                  },
                 ),
+                // Text(
+                //   "About EESTEC",
+                //   style: TextStyle(
+                //       color: Colors.red,
+                //       fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
+                //       fontWeight: FontWeight.bold),
+                // ),
               ),
             ),
             Divider(
@@ -43,8 +67,10 @@ class AboutEestec extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 60.w,
-                    child: Text(
-                      "Η EESTEC (Electrical Engineering STudent’s European assoCiation) αποτελεί έναν μη πολιτικό και μη κερδοσκοπικό οργανισμό φοιτητών Ηλεκτρολόγων Μηχανικών και όχι μόνο. Ο οργανισμός ιδρύθηκε στο Delft, το 1986. Η EESTEC αποσκοπεί στην ανάπτυξη διεθνών επαφών μεταξύ ευρωπαίων φοιτητών, δίνοντας τους την ευκαιρία να εξελιχθούν σε ακαδημαϊκό, επαγγελματικό και κοινωνικό επίπεδο. Η EESTEC έχει παραρτήματα σε 24 χώρες και συνεργάζεται με 54 πανεπιστήμια από όλη την Ευρώπη.Ως διεθνής οργανισμός, η EESTEC αποτελείται από International Teams και Projects, στα οποία συμμετέχουν φοιτητές από όλη την Ευρώπη. Εδώ  μπορείτε να βρείτε παραπάνω πληροφορίες για την διεθνή πλευρά της EESTEC",
+                    child: LangText(
+                      english: "//TODO",
+                      greek:
+                          "Η EESTEC (Electrical Engineering STudent’s European assoCiation) αποτελεί έναν μη πολιτικό και μη κερδοσκοπικό οργανισμό φοιτητών Ηλεκτρολόγων Μηχανικών και όχι μόνο. Ο οργανισμός ιδρύθηκε στο Delft, το 1986. Η EESTEC αποσκοπεί στην ανάπτυξη διεθνών επαφών μεταξύ ευρωπαίων φοιτητών, δίνοντας τους την ευκαιρία να εξελιχθούν σε ακαδημαϊκό, επαγγελματικό και κοινωνικό επίπεδο. Η EESTEC έχει παραρτήματα σε 24 χώρες και συνεργάζεται με 54 πανεπιστήμια από όλη την Ευρώπη.Ως διεθνής οργανισμός, η EESTEC αποτελείται από International Teams και Projects, στα οποία συμμετέχουν φοιτητές από όλη την Ευρώπη. Εδώ  μπορείτε να βρείτε παραπάνω πληροφορίες για την διεθνή πλευρά της EESTEC",
                       style: TextStyle(
                         fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,
                       ),
@@ -78,8 +104,9 @@ class AboutEestec extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                child: Text(
-                  "Μάθετε περισσότερα",
+                child: LangText(
+                  english: "Learn more",
+                  greek: "Μάθετε περισσότερα",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: Responsive.isMobile(context) ? 5.w : 2.w),

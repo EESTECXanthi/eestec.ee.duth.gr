@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:website/events/event_catergory.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';
+import 'package:website/widgets/lang_changer.dart';
 
 class EventContainer extends StatelessWidget {
   const EventContainer({Key? key, required this.category}) : super(key: key);
@@ -53,8 +54,9 @@ class EventContainer extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: Text(
-                  category.desc,
+                child: LangText(
+                  greek: category.desc["greek"] ?? "",
+                  english: category.desc["english"] ?? "",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,

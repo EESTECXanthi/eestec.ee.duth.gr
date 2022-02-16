@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:website/data/website_sponsors.dart';
 import 'package:sizer/sizer.dart';
 import 'package:website/homepage/current_event.dart';
+import 'package:website/widgets/lang_changer.dart';
 
 class SponsorList extends StatelessWidget {
   const SponsorList({
@@ -19,6 +20,7 @@ class SponsorList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var desc;
     return sponsors.isNotEmpty
         ? Padding(
             padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.h),
@@ -81,7 +83,14 @@ class SponsorList extends StatelessWidget {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              content: Text(sponsors[i].desc!),
+                                              content: LangText(
+                                                greek: sponsors[i]
+                                                        .desc?["greek"] ??
+                                                    "",
+                                                english: sponsors[i]
+                                                        .desc?["english"] ??
+                                                    "",
+                                              ),
                                             );
                                           });
                                     },
