@@ -7,6 +7,7 @@ import 'package:website/about_eestec/about_eestec.dart';
 import 'package:website/about_us/about_us.dart';
 import 'package:website/bloc/lang.dart';
 import 'package:website/faq/faq.dart';
+import 'package:website/gallery/gallery.dart';
 import 'package:website/homepage/homepage.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';
@@ -36,6 +37,10 @@ class Navigation extends StatelessWidget {
         text: "About EESTEC",
         push: AboutEestec(),
       ),
+      _Action(
+        text: "Gallery",
+        push: Container(),
+      ),
       const _Action(
         text: "OUR EVENTS",
         push: EventPage(),
@@ -52,17 +57,17 @@ class Navigation extends StatelessWidget {
       BlocBuilder<Language, String>(builder: (context, lang) {
         return Center(
           child: DropdownButton<String>(
-              hint: lang == "el"
-                  ? Flag.fromCode(FlagsCode.US, height: 1.h, width: 1.w)
-                  : Flag.fromCode(FlagsCode.GR, height: 1.h, width: 1.w),
+              hint: lang.contains("en")
+                  ? Flag.fromCode(FlagsCode.US, height: 2.h, width: 2.w)
+                  : Flag.fromCode(FlagsCode.GR, height: 2.h, width: 2.w),
               items: [
                 DropdownMenuItem(
-                  child: Flag.fromCode(FlagsCode.BR, height: 1.h, width: 1.w),
-                  value: "en",
+                  child: Flag.fromCode(FlagsCode.GR, height: 2.h, width: 2.w),
+                  value: "el",
                 ),
                 DropdownMenuItem(
-                  child: Flag.fromCode(FlagsCode.GR, height: 1.h, width: 1.w),
-                  value: "el",
+                  child: Flag.fromCode(FlagsCode.US, height: 2.h, width: 2.w),
+                  value: "en",
                 ),
               ],
               onChanged: (val) {

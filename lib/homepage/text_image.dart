@@ -26,49 +26,52 @@ class TextImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            alignment: reversed ? Alignment.bottomRight : Alignment.centerLeft,
-            child: LangText(
-              english: english,
-              greek: greek,
-              textAlign: TextAlign.end,
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-                fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DottedLine(
-              dashColor: Colors.red,
-              lineThickness: 0.5.w,
-              dashLength: 1.w,
-              dashGapLength: 1.w,
-            ),
-          ),
-          BlocBuilder<Language, String>(builder: (context, snapshot) {
-            return Align(
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
               alignment:
                   reversed ? Alignment.bottomRight : Alignment.centerLeft,
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,
-                  ),
-                  children: snapshot == "el" || englishText == null
-                      ? greekText
-                      : englishText,
+              child: LangText(
+                english: english,
+                greek: greek,
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
                 ),
               ),
-            );
-          }),
-        ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: DottedLine(
+                dashColor: Colors.red,
+                lineThickness: 0.5.w,
+                dashLength: 1.w,
+                dashGapLength: 1.w,
+              ),
+            ),
+            BlocBuilder<Language, String>(builder: (context, snapshot) {
+              return Align(
+                alignment:
+                    reversed ? Alignment.bottomRight : Alignment.centerLeft,
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,
+                    ),
+                    children: snapshot == "el" || englishText == null
+                        ? greekText
+                        : englishText,
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
       ),
       // Responsive.isMobile(context)
       //     ? const SizedBox.shrink()
@@ -85,7 +88,7 @@ class TextImage extends StatelessWidget {
       list = list.reversed.toList();
     }
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: list),
     );
   }

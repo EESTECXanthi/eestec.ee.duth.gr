@@ -54,7 +54,7 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> tabs = [
       Padding(
-          child: Text("History"),
+          child: Text("Info"),
           padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w)),
       Padding(
           child: Text("Board"),
@@ -68,8 +68,8 @@ class AboutUs extends StatelessWidget {
         .toList());
 
     List<Widget> pageViews = [
-      const Board(),
       const History(),
+      const Board(),
       ...annualTeams.keys
           .map<Widget>((e) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -105,7 +105,7 @@ class AboutUs extends StatelessWidget {
     ];
 
     return DefaultTabController(
-        length: annualTeams.length + 1, // one for History tab
+        length: annualTeams.length + 2, // one for History tab and one for board
         child: Navigation(
           bottom: TabBar(
             isScrollable: true,

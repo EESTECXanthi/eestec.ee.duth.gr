@@ -36,42 +36,43 @@ class HomePage extends StatelessWidget {
           },
           child: const Icon(Icons.message)),
       child: ListView(
+        shrinkWrap: true,
         children: [
-          // Stack(
-          //   children: [
-          //     CarouselSlider(
-          //       items: const [
-          //         _Image(image: "0"),
-          //         _Image(image: "1"),
-          //         _Image(image: "2"),
-          //         _Image(image: "3"),
-          //         _Image(image: "4"),
-          //         _Image(image: "5"),
-          //         _Image(image: "6"),
-          //       ],
-          //       options: CarouselOptions(
-          //         scrollPhysics: const NeverScrollableScrollPhysics(),
-          //         autoPlay: true,
-          //         viewportFraction: 1,
-          //         height: MediaQuery.of(context).size.height,
-          //       ),
-          //     ),
-          //     Positioned(
-          //       bottom: 0,
-          //       child: WaveWidget(
-          //         config: CustomConfig(
-          //           durations: [35000, 19440],
-          //           heightPercentages: [0.20, 0.23],
-          //           colors: [
-          //             Colors.redAccent,
-          //             Colors.red,
-          //           ],
-          //         ),
-          //         size: Size(MediaQuery.of(context).size.width, 22.h),
-          //       ),
-          //     ),
-          //   ],
-          // ),
+          Stack(
+            children: [
+              CarouselSlider(
+                items: const [
+                  _Image(image: "0"),
+                  _Image(image: "1"),
+                  _Image(image: "2"),
+                  _Image(image: "3"),
+                  _Image(image: "4"),
+                  _Image(image: "5"),
+                  _Image(image: "6"),
+                ],
+                options: CarouselOptions(
+                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  height: MediaQuery.of(context).size.height,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: WaveWidget(
+                  config: CustomConfig(
+                    durations: [35000, 19440],
+                    heightPercentages: [0.20, 0.23],
+                    colors: [
+                      Colors.redAccent,
+                      Colors.red,
+                    ],
+                  ),
+                  size: Size(MediaQuery.of(context).size.width, 22.h),
+                ),
+              ),
+            ],
+          ),
           Transform.rotate(
               angle: pi,
               child: WaveWidget(
