@@ -8,7 +8,9 @@ import 'package:website/about_us/about_us.dart';
 import 'package:website/bloc/lang.dart';
 import 'package:website/faq/faq.dart';
 import 'package:website/gallery/gallery.dart';
+import 'package:website/gallery/gallery_page.dart';
 import 'package:website/homepage/homepage.dart';
+import 'package:website/information_page/information_page.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,13 +39,17 @@ class Navigation extends StatelessWidget {
         text: "About EESTEC",
         push: AboutEestec(),
       ),
-      _Action(
+      const _Action(
         text: "Gallery",
-        push: Container(),
+        push: GalleryPage(),
       ),
       const _Action(
         text: "OUR EVENTS",
         push: EventPage(),
+      ),
+      const _Action(
+        text: "Articles",
+        push: InformationPage(),
       ),
       // _Action(
       //   text: "FAQ",

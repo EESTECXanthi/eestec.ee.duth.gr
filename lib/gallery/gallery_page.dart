@@ -35,13 +35,14 @@ class _GalleryPageState extends State<GalleryPage> {
   @override
   Widget build(BuildContext context) {
     Widget child;
-    if (category == null) {
+    final _category = category;
+    if (_category == null) {
       child = GalleryCategories(
         categories: categories,
         updateCategory: updateCategory,
       );
     } else {
-      child = Gallery(category: category!, updateCategory: updateCategory);
+      child = Gallery(category: _category, updateCategory: updateCategory);
     }
     return Navigation(child: child);
   }

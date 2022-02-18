@@ -10,10 +10,6 @@ class Gallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildGallery();
-  }
-
-  Widget buildGallery() {
     const categoryTitleStyle =
         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
 

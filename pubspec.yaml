@@ -44,4 +44,5 @@ flutter:
     - assets/slider/
     - assets/events/
     - assets/sponsors/
+    - assets/gallery/
   uses-material-design: true

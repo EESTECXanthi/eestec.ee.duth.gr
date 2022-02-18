@@ -20,7 +20,6 @@ class SponsorList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var desc;
     return sponsors.isNotEmpty
         ? Padding(
             padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.h),
