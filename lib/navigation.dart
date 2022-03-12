@@ -5,12 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:website/about_eestec/about_eestec.dart';
 import 'package:website/about_us/about_us.dart';
+import 'package:website/article_page/article_page.dart';
 import 'package:website/bloc/lang.dart';
-import 'package:website/faq/faq.dart';
-import 'package:website/gallery/gallery.dart';
 import 'package:website/gallery/gallery_page.dart';
 import 'package:website/homepage/homepage.dart';
-import 'package:website/information_page/information_page.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +47,7 @@ class Navigation extends StatelessWidget {
       ),
       const _Action(
         text: "Articles",
-        push: InformationPage(),
+        push: ArticlePage(),
       ),
       // _Action(
       //   text: "FAQ",

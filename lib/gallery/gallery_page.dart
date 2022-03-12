@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:website/gallery/gallery.dart';
+import 'package:website/gallery/images_page.dart';
 import 'package:website/gallery/gallery_categories.dart';
 import 'package:website/navigation.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'category.dart';
 
 class GalleryPage extends StatefulWidget {
@@ -14,35 +17,15 @@ class GalleryPage extends StatefulWidget {
 class _GalleryPageState extends State<GalleryPage> {
   Category? category;
 
-  final categories = [
-    Category(
-        name: 'SSA1\n01/01/2001',
-        path: 'ssa1',
-        imagePath: 'assets/gallery/ssa.png',
-        numberOfPhotos: 16),
-    Category(
-        name: 'SSA2\n01/01/2002',
-        path: 'ssa2',
-        imagePath: 'assets/gallery/ssa.png',
-        numberOfPhotos: 16),
-    Category(
-        name: 'SSA3\n01/01/2003',
-        path: 'ssa3',
-        imagePath: 'assets/gallery/ssa.png',
-        numberOfPhotos: 16),
-  ];
-
   @override
   Widget build(BuildContext context) {
     Widget child;
-    final _category = category;
-    if (_category == null) {
+    if (category == null) {
       child = GalleryCategories(
-        categories: categories,
         updateCategory: updateCategory,
       );
     } else {
-      child = Gallery(category: _category, updateCategory: updateCategory);
+      child = Gallery(category: category!, updateCategory: updateCategory);
     }
     return Navigation(child: child);
   }

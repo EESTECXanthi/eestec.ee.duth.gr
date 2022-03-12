@@ -1,11 +1,11 @@
 {
-    "name": "website",
-    "short_name": "website",
+    "name": "EESTEC WEBSITE FOR LC XANTHI",
+    "short_name": "EESTEC XANTHI",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "This is the official website for EESTEC LC Xanthi.(enjoy)",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

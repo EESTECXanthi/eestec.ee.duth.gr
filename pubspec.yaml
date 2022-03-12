@@ -1,5 +1,5 @@
 name: website
-description: the source code of eestec.ee.duth.gr website
+description: This is the official website for EESTEC LC Xanthi.(enjoy)
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
@@ -25,6 +25,9 @@ dependencies:
   google_fonts:
   extended_image: ^6.0.1
   flutter_svg: ^1.0.0
+  flutter_staggered_grid_view:
+  share_plus:
+  download:
   flutter:
     sdk: flutter
 
@@ -45,4 +48,5 @@ flutter:
     - assets/events/
     - assets/sponsors/
     - assets/gallery/
+    - assets/annualTeams/
   uses-material-design: true

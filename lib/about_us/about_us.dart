@@ -54,10 +54,10 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> tabs = [
       Padding(
-          child: Text("Info"),
+          child: const Text("Info"),
           padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w)),
       Padding(
-          child: Text("Board"),
+          child: const Text("Board"),
           padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w))
     ];
 
@@ -74,10 +74,11 @@ class AboutUs extends StatelessWidget {
           .map<Widget>((e) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
-                  Text(e,
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: Responsive.isMobile(context) ? 7.w : 3.w)),
+                  // Text(e,
+                  //     style: TextStyle(
+                  //         color: Colors.red,
+                  //         fontSize: Responsive.isMobile(context) ? 7.w : 3.w)),
+                  Image.asset("assets/annualTeams/$e.png"),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: DottedLine(

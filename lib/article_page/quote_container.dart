@@ -1,49 +1,42 @@
-import 'package:dotted_line/dotted_line.dart';
-import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:timelines/timelines.dart';
-import 'package:website/responsive.dart';
-import 'package:website/widgets/lang_changer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:website/article_page/quotes.dart';
+
+import '../responsive.dart';
 
 class QuoteContainer extends StatelessWidget {
   const QuoteContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var random = Random();
+    final quote = quotes.elementAt(random.nextInt(quotes.length));
     return Center(
       child: SizedBox(
-        height: 20.h,
-        child: Card(
-          // margin: EdgeInsets.symmetric(vertical: 3.h),
-          child: Padding(
+        child: Padding(
             padding: EdgeInsets.symmetric(vertical: 3.h),
             child: Column(
               children: [
                 Text(
-                  'quote',
+                  quote.quote,
                   style: GoogleFonts.lato(
-                      fontSize: 4.w,
+                      fontSize: Responsive.isMobile(context) ? 7.w : 3.w,
                       fontWeight: FontWeight.bold,
                       color: Colors.red),
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text('-author',
+                Padding(
+                  padding: EdgeInsets.only(left: 40.w),
+                  child: Text('-${quote.author}',
                       style: GoogleFonts.roboto(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 1.w)),
+                          fontSize: Responsive.isMobile(context) ? 5.w : 2.w)),
                 ),
               ],
-            ),
-          ),
-          elevation: 10,
-          // decoration: BoxDecoration(
-          //     color: Colors.red,
-          //     borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        ),
+            )),
       ),
     );
   }

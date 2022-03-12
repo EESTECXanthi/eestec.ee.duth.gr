@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:sizer/sizer.dart';
-import 'package:website/widgets/lang_changer.dart';
 
 class CurrentEvent extends StatelessWidget {
   const CurrentEvent({Key? key}) : super(key: key);
