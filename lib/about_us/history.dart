@@ -10,8 +10,8 @@ class History extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset("assets/misc/EESTECHistory.png",
-            filterQuality: FilterQuality.none),
+        // Image.asset("assets/misc/EESTECHistory.jpg",
+        //     filterQuality: FilterQuality.none),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
           child: LangText(

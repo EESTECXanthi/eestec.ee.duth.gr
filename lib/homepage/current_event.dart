@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -7,45 +10,107 @@ class CurrentEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset("assets/events/${currentEvent.image}"),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          child: Text(
-            "Soft ${currentEvent.name} Sponsors:",
-            style: TextStyle(
-              color: currentEvent.color,
-              fontWeight: FontWeight.bold,
-              fontSize: 4.w,
-            ),
-          ),
-        ),
-        SponsorList(
-          sponsors: currentEvent.sponsors,
-          color: currentEvent.color,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 3.h),
-          child: Text(
-            "WE ALSO THANK",
-            style: TextStyle(
-              color: currentEvent.color,
-              fontWeight: FontWeight.bold,
-              fontSize: 3.w,
-            ),
-          ),
-        ),
-        SponsorList(
-          sponsors: currentEvent.also,
-          color: currentEvent.color,
-          size: 0.5,
-        ),
-      ],
+    Future<CurrentEventModel> dynamicEventFuture =
+        CurrentEventUtil.getCurrentEvent();
+    return FutureBuilder<CurrentEventModel>(
+      future: dynamicEventFuture,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: [
+              Image.asset("assets/currentEvent/${snapshot.data!.image}"),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                child: Text(
+                  "${snapshot.data?.name} Sponsors:",
+                  style: TextStyle(
+                    color: snapshot.data?.color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 4.w,
+                  ),
+                ),
+              ),
+              SponsorList(
+                sponsors: snapshot.data!.sponsors,
+                color: snapshot.data!.color,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 3.h),
+                child: Text(
+                  "WE ALSO THANK",
+                  style: TextStyle(
+                    color: snapshot.data!.color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 3.w,
+                  ),
+                ),
+              ),
+              SponsorList(
+                sponsors: snapshot.data!.also,
+                color: snapshot.data!.color,
+                size: 0.5,
+              ),
+            ],
+          );
+        }
+        return Column(
+          children: const [
+            Text("Loading current event"),
+            CircularProgressIndicator()
+          ],
+        );
+      },
     );
+    // return Column(
+    //   children: [
+    //     FutureBuilder<CurrentEventModel>(
+    //       future: dynamicEventFuture,
+    //       builder: (context, snapshot) {
+    //         if (snapshot.hasData) {
+    //           return Text(
+    //               "DEBUG Current Event\n${snapshot.data?.name}\n${snapshot.data?.image}\n${snapshot.data?.color}");
+    //         }
+    //         return const Text("Loading current event");
+    //       },
+    //     ),
+    //     Image.asset("assets/events/${currentEvent.image}"),
+    //     Padding(
+    //       padding: EdgeInsets.symmetric(vertical: 10.h),
+    //       child: Text(
+    //         "Soft ${currentEvent.name} Sponsors:",
+    //         style: TextStyle(
+    //           color: currentEvent.color,
+    //           fontWeight: FontWeight.bold,
+    //           fontSize: 4.w,
+    //         ),
+    //       ),
+    //     ),
+    //     SponsorList(
+    //       sponsors: currentEvent.sponsors,
+    //       color: currentEvent.color,
+    //     ),
+    //     Padding(
+    //       padding: EdgeInsets.symmetric(vertical: 3.h),
+    //       child: Text(
+    //         "WE ALSO THANK",
+    //         style: TextStyle(
+    //           color: currentEvent.color,
+    //           fontWeight: FontWeight.bold,
+    //           fontSize: 3.w,
+    //         ),
+    //       ),
+    //     ),
+    //     SponsorList(
+    //       sponsors: currentEvent.also,
+    //       color: currentEvent.color,
+    //       size: 0.5,
+    //     ),
+    //   ],
+    // );
   }
 }
 
+/*
 const currentEvent = CurrentEventModel(
     color: Colors.purple,
     name: "Soft Skills Academy 7",
@@ -109,7 +174,7 @@ const currentEvent = CurrentEventModel(
       CurrentEventSponsor(image: "see_you.jpg"),
       CurrentEventSponsor(image: "tzoukas.jpg"),
     ]);
-
+*/
 class CurrentEventModel {
   final Color color;
   final String name;
@@ -140,4 +205,97 @@ class CurrentEventSponsor {
     this.stars = 0,
     this.desc,
   });
+}
+
+class CurrentEventUtil {
+  static Future<CurrentEventModel> getCurrentEvent() async {
+    // print("CurrentEventUtil: Loading current event");
+    final manifest = await rootBundle.loadString('AssetManifest.json');
+    final Map<String, dynamic> decoded = json.decode(manifest);
+    List<String> keys = decoded.keys.toList();
+
+    keys = keys
+        .where((dynamic key) => key.startsWith('assets/currentEvent/event'))
+        .toList();
+
+    final String filename = Uri.decodeFull(keys[0]).split('/').last;
+    final parts = filename.split('_').toList();
+    final color = Color(int.parse("0x${parts[2].substring(0, 8)}"));
+
+    final List<CurrentEventSponsor> sponsors = await getCurrentEventSponsors();
+    final List<CurrentEventSponsor> primarySponsors =
+        sponsors.where((CurrentEventSponsor s) => s.stars != 0).toList();
+    final List<CurrentEventSponsor> secondarySponsors =
+        sponsors.where((CurrentEventSponsor s) => s.stars == 0).toList();
+
+    return CurrentEventModel(
+        color: color,
+        name: parts[1],
+        image: filename,
+        sponsors: primarySponsors,
+        also: secondarySponsors);
+  }
+
+  static Future<List<CurrentEventSponsor>> getCurrentEventSponsors() async {
+    // print("CurrentEventUtil: Loading sponsors");
+    final manifest = await rootBundle.loadString('AssetManifest.json');
+    final Map<String, dynamic> decoded = json.decode(manifest);
+    List<String> keys = decoded.keys.toList();
+
+    keys = keys
+        .where((dynamic key) => key.startsWith('assets/currentEvent/sponsor'))
+        .toList();
+    keys = keys.map((String key) => key.split('/').last).toList();
+
+    List<CurrentEventSponsor> sponsors = [];
+    for (String k in keys) {
+      // sponsor_3_fagi_fagi.gr_test description.png
+      //    0    1   2    3              4
+      // print("key encoded: $k");
+      k = Uri.decodeFull(k);
+      // print("key decoded: $k");
+      final parts = k.split('_').toList();
+
+      final stars = int.parse(parts[1]);
+      Map<String, String>? desc;
+      String link = "";
+
+      if (parts.length == 5) {
+        link = parts[3];
+        // print("link: $link");
+        desc = {
+          "greek": parts[4].substring(0, parts[4].length - 4),
+          "english": "todo",
+        };
+      }
+
+      if (parts.length == 4) {
+        link = parts[3].substring(0, parts[3].length - 4);
+        // print("link: $link");
+      }
+
+      if (link != "") {
+        link = "http://$link";
+      }
+
+      final s = CurrentEventSponsor(
+        stars: stars,
+        name: parts[2],
+        link: link,
+        desc: desc,
+        image: k,
+      );
+      sponsors.add(s);
+    }
+
+    sponsors.sort((a, b) {
+      if (a.stars > b.stars) {
+        return -1;
+      } else if (a.stars < b.stars) {
+        return 1;
+      }
+      return 0;
+    });
+    return sponsors;
+  }
 }

@@ -49,4 +49,6 @@ flutter:
     - assets/sponsors/
     - assets/gallery/
     - assets/annualTeams/
+    - assets/board/
+    - assets/currentEvent/
   uses-material-design: true

@@ -114,7 +114,6 @@ class HomePage extends StatelessWidget {
                       ". Η Τ.Ε. Ξάνθης ιδρύθηκε το 2010 και υπάρχουν περισσότερα από 80 ενεργά μέλη-φοιτητές του Δημοκρίτειου Πανεπιστημίου Θράκης."),
             ],
             englishText: [
-              TextSpan(text: "//todo "),
               TextSpan(
                   text: 'E', style: TextStyle(fontWeight: FontWeight.bold)),
               TextSpan(text: "lectrical "),
@@ -129,12 +128,15 @@ class HomePage extends StatelessWidget {
               TextSpan(text: "uropean asso"),
               TextSpan(
                   text: 'C', style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: 'iation (EESTEC) //todo '),
+              TextSpan(
+                  text:
+                      'iation (EESTEC) is a non-political, non-governmental and non-profit pan-European student organization in the field of electrical engineering. EESTEC is made up of local committees throughout Europe, one of which is '),
               TextSpan(
                   text: 'EESTEC LC Xanthi',
                   style: TextStyle(fontWeight: FontWeight.bold)),
               TextSpan(
-                text: "//todo",
+                text:
+                    ". LC Xanthi was founded in 2010 and there are more than 80 active members-students of the Democritus University of Thrace. ",
               )
             ],
             greek: "WHO ARE WE",
@@ -152,11 +154,13 @@ class HomePage extends StatelessWidget {
                       ' είναι να δημιουργήσει, να προωθήσει και να αναπτύξει διεθνείς επαφές και ανταλλαγή ιδεών μεταξύ φοιτητών. Η αποστολή της οργάνωσης είναι η ανάπτυξη των μελών τοσο ακαδημαϊκα όσο και επαγγελματικά.'),
             ],
             englishText: [
-              TextSpan(text: "//todo "),
+              TextSpan(text: "Purpose of"),
               TextSpan(
                   text: 'EESTEC',
                   style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: "//todo"),
+              TextSpan(
+                  text:
+                      " is to create, promote and develop international contacts and exchange of ideas between students. The mission of the organization is the development of members both academically and professionally."),
             ],
             greek: "OUR GOAL",
             image: "assets/homepage/1.jpg",

@@ -61,6 +61,7 @@ class Navigation extends StatelessWidget {
       BlocBuilder<Language, String>(builder: (context, lang) {
         return Center(
           child: DropdownButton<String>(
+              value: lang,
               hint: lang.contains("en")
                   ? Flag.fromCode(FlagsCode.US, height: 2.h, width: 2.w)
                   : Flag.fromCode(FlagsCode.GR, height: 2.h, width: 2.w),

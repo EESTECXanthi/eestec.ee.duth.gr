@@ -68,9 +68,10 @@ class AboutEestec extends StatelessWidget {
                   SizedBox(
                     width: 60.w,
                     child: LangText(
-                      english: "//TODO",
+                      english:
+                          "EESTEC (Electrical Engineering STudents' European assoCiaton) is an apolitical, non-governmental and non-profit organization for EECS students at universities, institutes and schools of technology. The organization was founded in Delft, in 1986. EESTEC aims to develop international contacts among european students, giving them the chance to develop their academic, professional and social lives. EESTEC is present in 24 countries and 54 cities across Europe. As an international organization, EESTEC contains International Teams and Projects, in which students can be part of",
                       greek:
-                          "Η EESTEC (Electrical Engineering STudent’s European assoCiation) αποτελεί έναν μη πολιτικό και μη κερδοσκοπικό οργανισμό φοιτητών Ηλεκτρολόγων Μηχανικών και όχι μόνο. Ο οργανισμός ιδρύθηκε στο Delft, το 1986. Η EESTEC αποσκοπεί στην ανάπτυξη διεθνών επαφών μεταξύ ευρωπαίων φοιτητών, δίνοντας τους την ευκαιρία να εξελιχθούν σε ακαδημαϊκό, επαγγελματικό και κοινωνικό επίπεδο. Η EESTEC έχει παραρτήματα σε 24 χώρες και συνεργάζεται με 54 πανεπιστήμια από όλη την Ευρώπη.Ως διεθνής οργανισμός, η EESTEC αποτελείται από International Teams και Projects, στα οποία συμμετέχουν φοιτητές από όλη την Ευρώπη. Εδώ  μπορείτε να βρείτε παραπάνω πληροφορίες για την διεθνή πλευρά της EESTEC",
+                          "Η EESTEC (Electrical Engineering STudents' European assoCiation) αποτελεί έναν μη πολιτικό και μη κερδοσκοπικό οργανισμό φοιτητών Ηλεκτρολόγων Μηχανικών και όχι μόνο. Ο οργανισμός ιδρύθηκε στο Delft, το 1986. Η EESTEC αποσκοπεί στην ανάπτυξη διεθνών επαφών μεταξύ ευρωπαίων φοιτητών, δίνοντας τους την ευκαιρία να εξελιχθούν σε ακαδημαϊκό, επαγγελματικό και κοινωνικό επίπεδο. Η EESTEC έχει παραρτήματα σε 24 χώρες και συνεργάζεται με 54 πανεπιστήμια από όλη την Ευρώπη.Ως διεθνής οργανισμός, η EESTEC αποτελείται από International Teams και Projects, στα οποία συμμετέχουν φοιτητές από όλη την Ευρώπη. Εδώ  μπορείτε να βρείτε παραπάνω πληροφορίες για την διεθνή πλευρά της EESTEC",
                       style: TextStyle(
                         fontSize: Responsive.isMobile(context) ? 5.w : 1.5.w,
                       ),

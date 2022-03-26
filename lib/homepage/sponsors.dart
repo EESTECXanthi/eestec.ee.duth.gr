@@ -1,8 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:website/data/website_sponsors.dart';
 import 'package:sizer/sizer.dart';
 import 'package:website/homepage/current_event.dart';
 import 'package:website/widgets/lang_changer.dart';
@@ -44,7 +42,7 @@ class SponsorList extends StatelessWidget {
                             }
                           },
                           child: ExtendedImage.asset(
-                            "assets/sponsors/${sponsors[i].image}",
+                            "assets/currentEvent/${sponsors[i].image}",
                             //fit: BoxFit.cover,
                             enableMemoryCache: true,
                             cacheRawData: true,
@@ -76,8 +74,8 @@ class SponsorList extends StatelessWidget {
                             for (int j = 0; j < sponsors[i].stars; j++)
                               Icon(Icons.star, color: color),
                             sponsors[i].desc != null
-                                ? IconButton(
-                                    onPressed: () async {
+                                ? GestureDetector(
+                                    onTap: () async {
                                       await showDialog(
                                           context: context,
                                           builder: (context) {
@@ -93,7 +91,7 @@ class SponsorList extends StatelessWidget {
                                             );
                                           });
                                     },
-                                    icon: const Icon(
+                                    child: const Icon(
                                       Icons.info,
                                       color: Colors.grey,
                                     ))

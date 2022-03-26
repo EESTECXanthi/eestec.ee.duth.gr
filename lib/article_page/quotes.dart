@@ -24,4 +24,10 @@ const List<Quote> quotes = [
       quote:
           "If science is to progress, what we need is the ability to experiment.",
       author: "Richard P. Feynman"),
+  Quote(
+      quote: "Somewhere, something incredible is waiting to be known.",
+      author: "Carl Sagan"),
+  Quote(
+      quote: "Science is organized knowledge. Wisdom is organized life.",
+      author: "Immanuel Kant")
 ];
