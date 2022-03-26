@@ -43,7 +43,7 @@ class _BoardState extends State<Board> {
         position: member.split("_")[1],
         nameEnglish: member.split("_")[2],
         nameGreek: member.split("_")[3].split(".")[0],
-        image: memberManifest,
+        image: member,
       );
 
       boardsMap[year]!.add(x);
@@ -143,7 +143,8 @@ class _BoardMember extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 3.h),
           child: CircleAvatar(
-            backgroundImage: AssetImage(boardMember.image),
+            backgroundImage: AssetImage(
+                "assets/board/${Uri.encodeComponent(boardMember.image)}"),
           ),
         ),
         LangText(

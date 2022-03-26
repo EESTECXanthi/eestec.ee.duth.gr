@@ -78,7 +78,8 @@ class AboutUs extends StatelessWidget {
                   //     style: TextStyle(
                   //         color: Colors.red,
                   //         fontSize: Responsive.isMobile(context) ? 7.w : 3.w)),
-                  Image.asset("assets/annualTeams/$e.png"),
+                  Image.asset(
+                      "assets/annualTeams/${Uri.encodeComponent(e)}.png"),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: DottedLine(

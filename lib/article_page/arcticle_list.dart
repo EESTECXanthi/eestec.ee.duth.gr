@@ -22,8 +22,7 @@ class _ArticleListState extends State<ArticleList> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: SliverList(
+    return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           final article = articles[index];
@@ -50,6 +49,6 @@ class _ArticleListState extends State<ArticleList> {
         },
         childCount: _articles.length,
       ),
-    ));
+    );
   }
 }

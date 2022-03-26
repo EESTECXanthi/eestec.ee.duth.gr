@@ -28,11 +28,11 @@ const List<ArticleModel> articles = [
     image:
         "https://images.ctfassets.net/u4vv676b8z52/3DGAAIEOlBVIFBuekYpXgd/485ce8a9135d7dc5a646a712dcec2c29/hazel-eye-678x446-compressor.jpg?fm=jpg&q=80",
   ),
-  ArticleModel(
-    title: "...",
-    subtitle: "«Το κλειδί» και τα προβλήματα",
-    image:
-        "https://www.tanea.gr/wp-content/uploads/2021/04/texniti-noimosini_iefimerida.jpg",
-    link: "...",
-  ),
+  // ArticleModel(
+  //   title: "...",
+  //   subtitle: "«Το κλειδί» και τα προβλήματα",
+  //   image:
+  //       "https://www.tanea.gr/wp-content/uploads/2021/04/texniti-noimosini_iefimerida.jpg",
+  //   link: "...",
+  // ),
 ];
