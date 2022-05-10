@@ -143,8 +143,7 @@ class _BoardMember extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 3.h),
           child: CircleAvatar(
-            backgroundImage: AssetImage(
-                "assets/board/${Uri.encodeComponent(boardMember.image)}"),
+            backgroundImage: AssetImage("assets/board/${boardMember.image}"),
           ),
         ),
         LangText(

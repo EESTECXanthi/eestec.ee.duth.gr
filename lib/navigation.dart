@@ -37,21 +37,17 @@ class Navigation extends StatelessWidget {
         text: "About EESTEC",
         push: AboutEestec(),
       ),
-      const _Action(
-        text: "Gallery",
-        push: GalleryPage(),
-      ),
+      // const _Action(
+      //   text: "Gallery",
+      //   push: GalleryPage(),
+      // ),
       const _Action(
         text: "OUR EVENTS",
         push: EventPage(),
       ),
-      const _Action(
-        text: "Articles",
-        push: ArticlePage(),
-      ),
-      // _Action(
-      //   text: "FAQ",
-      //   push: Faq(),
+      // const _Action(
+      //   text: "Articles",
+      //   push: ArticlePage(),
       // ),
       const _Action(
         text: "CONTACT US",

@@ -2,7 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sizer/sizer.dart';
-import 'package:website/homepage/current_event.dart';
+import 'package:website/homepage/event.dart';
 import 'package:website/widgets/lang_changer.dart';
 
 class SponsorList extends StatelessWidget {

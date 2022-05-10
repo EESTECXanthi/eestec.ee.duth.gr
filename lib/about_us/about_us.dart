@@ -56,9 +56,9 @@ class AboutUs extends StatelessWidget {
       Padding(
           child: const Text("Info"),
           padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w)),
-      Padding(
-          child: const Text("Board"),
-          padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w))
+      // Padding(
+      //     child: const Text("Board"),
+      //     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w))
     ];
 
     tabs.addAll(annualTeams.keys
@@ -69,17 +69,20 @@ class AboutUs extends StatelessWidget {
 
     List<Widget> pageViews = [
       const History(),
-      const Board(),
+      // const Board(),
       ...annualTeams.keys
           .map<Widget>((e) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
+                child: ListView(children: [
                   // Text(e,
                   //     style: TextStyle(
                   //         color: Colors.red,
                   //         fontSize: Responsive.isMobile(context) ? 7.w : 3.w)),
                   Image.asset(
-                      "assets/annualTeams/${Uri.encodeComponent(e)}.png"),
+                    "assets/annualTeams/$e.png",
+                    fit: Responsive.isMobile(context) ? BoxFit.fitHeight : null,
+                    height: Responsive.isMobile(context) ? 35.h : null,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: DottedLine(
@@ -107,7 +110,8 @@ class AboutUs extends StatelessWidget {
     ];
 
     return DefaultTabController(
-        length: annualTeams.length + 2, // one for History tab and one for board
+        length:
+            annualTeams.length + 2 - 1, // one for History tab and one for board
         child: Navigation(
           bottom: TabBar(
             isScrollable: true,

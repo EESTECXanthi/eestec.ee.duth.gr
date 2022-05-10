@@ -1,18 +1,138 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:sizer/sizer.dart';
 
-class CurrentEvent extends StatelessWidget {
-  const CurrentEvent({Key? key}) : super(key: key);
+class EventList extends StatelessWidget {
+  const EventList({Key? key}) : super(key: key);
+
+  Future<List<EventModel>> getevents() async {
+    final manifest = await rootBundle.loadString('AssetManifest.json');
+    final Map<String, dynamic> decoded = json.decode(manifest);
+    List<String> rootkeys = decoded.keys.toList();
+
+    List<EventModel> events = [];
+
+    try {
+      int index = 0;
+      while (true) {
+        final keys = rootkeys
+            .where(
+                (dynamic key) => key.startsWith('assets/events/${index}_event'))
+            .toList();
+
+        final String filename = Uri.decodeFull(keys[0]).split('/').last;
+        final parts = filename.split('_').toList();
+        final color = Color(int.parse("0x${parts[3].substring(0, 8)}"));
+
+        var sponsorsKeys = keys
+            .where((dynamic key) =>
+                key.startsWith('assets/events/${index}_sponsor'))
+            .toList();
+        sponsorsKeys =
+            sponsorsKeys.map((String key) => key.split('/').last).toList();
+
+        List<CurrentEventSponsor> sponsors = [];
+        for (String k in keys) {
+          // sponsor_3_fagi_fagi.gr_test description.png
+          //    0    1   2    3              4
+          // print("key encoded: $k");
+          k = Uri.decodeFull(k);
+          // print("key decoded: $k");
+          final parts = k.split('_').toList();
+
+          final stars = int.parse(parts[2]);
+          Map<String, String>? desc;
+          String link = "";
+
+          if (parts.length == 6) {
+            link = parts[4];
+            print("link: $link");
+            desc = {
+              "greek": parts[5].substring(0, parts[5].length - 4),
+              "english": "todo",
+            };
+          }
+
+          if (parts.length == 5) {
+            link = parts[4].substring(0, parts[3].length - 4);
+            print("link: $link");
+          }
+
+          if (link != "") {
+            link = "http://$link";
+          }
+
+          final s = CurrentEventSponsor(
+            stars: stars,
+            name: parts[3],
+            link: link,
+            desc: desc,
+            image: k,
+          );
+          sponsors.add(s);
+        }
+
+        sponsors.sort((a, b) {
+          if (a.stars > b.stars) {
+            return -1;
+          } else if (a.stars < b.stars) {
+            return 1;
+          }
+          return 0;
+        });
+
+        final List<CurrentEventSponsor> primarySponsors =
+            sponsors.where((CurrentEventSponsor s) => s.stars != 0).toList();
+        final List<CurrentEventSponsor> secondarySponsors =
+            sponsors.where((CurrentEventSponsor s) => s.stars == 0).toList();
+
+        events.add(EventModel(
+            color: color,
+            name: parts[2],
+            image: filename,
+            sponsors: primarySponsors,
+            also: secondarySponsors));
+        index++;
+      }
+      // ignore: empty_catches
+    } catch (e) {}
+
+    return events;
+  }
 
   @override
   Widget build(BuildContext context) {
-    Future<CurrentEventModel> dynamicEventFuture =
-        CurrentEventUtil.getCurrentEvent();
-    return FutureBuilder<CurrentEventModel>(
+    return Container(
+      color: Colors.blue,
+      height: 100,
+      child: FutureBuilder<List<EventModel>>(
+          future: getevents(),
+          builder: (context, snapshot) {
+            log("object");
+            final data = snapshot.data;
+            print(data);
+            if (data == null) {
+              return const CircularProgressIndicator();
+            }
+            return Column(
+              children: data.map((e) => EventDisplay(event: e)).toList(),
+            );
+          }),
+    );
+  }
+}
+
+class EventDisplay extends StatelessWidget {
+  const EventDisplay({Key? key, required this.event}) : super(key: key);
+  final EventModel event;
+  @override
+  Widget build(BuildContext context) {
+    Future<EventModel> dynamicEventFuture = CurrentEventUtil.getCurrentEvent();
+    return FutureBuilder<EventModel>(
       future: dynamicEventFuture,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -36,14 +156,16 @@ class CurrentEvent extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 3.h),
-                child: Text(
-                  "WE ALSO THANK",
-                  style: TextStyle(
-                    color: snapshot.data!.color,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 3.w,
-                  ),
-                ),
+                child: snapshot.data!.also.isNotEmpty
+                    ? Text(
+                        "WE ALSO THANK",
+                        style: TextStyle(
+                          color: snapshot.data!.color,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 3.w,
+                        ),
+                      )
+                    : null,
               ),
               SponsorList(
                 sponsors: snapshot.data!.also,
@@ -175,14 +297,14 @@ const currentEvent = CurrentEventModel(
       CurrentEventSponsor(image: "tzoukas.jpg"),
     ]);
 */
-class CurrentEventModel {
+class EventModel {
   final Color color;
   final String name;
   final String image;
   final List<CurrentEventSponsor> sponsors;
   final List<CurrentEventSponsor> also;
 
-  const CurrentEventModel({
+  const EventModel({
     required this.color,
     required this.name,
     required this.image,
@@ -208,14 +330,14 @@ class CurrentEventSponsor {
 }
 
 class CurrentEventUtil {
-  static Future<CurrentEventModel> getCurrentEvent() async {
+  static Future<EventModel> getCurrentEvent() async {
     // print("CurrentEventUtil: Loading current event");
     final manifest = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> decoded = json.decode(manifest);
     List<String> keys = decoded.keys.toList();
 
     keys = keys
-        .where((dynamic key) => key.startsWith('assets/currentEvent/event'))
+        .where((dynamic key) => key.startsWith('assets/events/event'))
         .toList();
 
     final String filename = Uri.decodeFull(keys[0]).split('/').last;
@@ -228,7 +350,7 @@ class CurrentEventUtil {
     final List<CurrentEventSponsor> secondarySponsors =
         sponsors.where((CurrentEventSponsor s) => s.stars == 0).toList();
 
-    return CurrentEventModel(
+    return EventModel(
         color: color,
         name: parts[1],
         image: filename,

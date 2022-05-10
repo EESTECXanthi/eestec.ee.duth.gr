@@ -6,7 +6,7 @@ import 'package:wave/config.dart';
 import 'package:website/faq/faq.dart';
 import 'package:website/faq/faq_container.dart';
 import 'package:website/faq/faq_model.dart';
-import 'package:website/homepage/current_event.dart';
+import 'package:website/homepage/event.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:website/navigation.dart';
 import 'package:wave/wave.dart';
@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
             image: "assets/homepage/1.jpg",
             reversed: true,
           ),
-          const CurrentEvent(),
+          const EventList(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

@@ -28,7 +28,7 @@ const List<EventCategory> categories = [
       }),
   EventCategory(
       name: "EESTech Challenge",
-      color: Color.fromRGBO(82, 189, 233, 1),
+      color: Color(0xFF52BDE9),
       image: "eestech.png",
       desc: {
         "greek":
