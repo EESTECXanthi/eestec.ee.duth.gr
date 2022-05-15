@@ -42,7 +42,7 @@ class SponsorList extends StatelessWidget {
                             }
                           },
                           child: ExtendedImage.asset(
-                            "assets/currentEvent/${sponsors[i].image}",
+                            "assets/events/${sponsors[i].image}",
                             //fit: BoxFit.cover,
                             enableMemoryCache: true,
                             cacheRawData: true,
