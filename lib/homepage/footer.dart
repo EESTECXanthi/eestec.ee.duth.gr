@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,10 +36,10 @@ class Footer extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () async {
-                      if (await canLaunch(
-                          "https://www.instagram.com/eestec_lc_xanthi/")) {
-                        await launch(
-                            "https://www.instagram.com/eestec_lc_xanthi/");
+                      if (await canLaunchUrl(Uri.parse(
+                          "https://www.instagram.com/eestec_lc_xanthi/"))) {
+                        await launchUrl(Uri.parse(
+                            "https://www.instagram.com/eestec_lc_xanthi/"));
                       } else {
                         throw "Could not launch instagram";
                       }
@@ -51,10 +50,10 @@ class Footer extends StatelessWidget {
                     )),
                 IconButton(
                     onPressed: () async {
-                      if (await canLaunch(
-                          "https://www.facebook.com/eesteclcxanthi/")) {
-                        await launch(
-                            "https://www.facebook.com/eesteclcxanthi/");
+                      if (await canLaunchUrl(Uri.parse(
+                          "https://www.facebook.com/eesteclcxanthi/"))) {
+                        await launchUrl(Uri.parse(
+                            "https://www.facebook.com/eesteclcxanthi/"));
                       } else {
                         throw "Could not launch facebook";
                       }
@@ -65,10 +64,10 @@ class Footer extends StatelessWidget {
                     )),
                 IconButton(
                     onPressed: () async {
-                      if (await canLaunch(
-                          "https://www.linkedin.com/company/eesteclcxanthi/")) {
-                        await launch(
-                            "https://www.linkedin.com/company/eesteclcxanthi/");
+                      if (await canLaunchUrl(Uri.parse(
+                          "https://www.linkedin.com/company/eesteclcxanthi/"))) {
+                        await launchUrl(Uri.parse(
+                            "https://www.linkedin.com/company/eesteclcxanthi/"));
                       } else {
                         throw "Could not launch linkedin";
                       }
@@ -79,10 +78,10 @@ class Footer extends StatelessWidget {
                     )),
                 IconButton(
                     onPressed: () async {
-                      if (await canLaunch(
-                          "https://www.youtube.com/channel/UC_8gbN7BrNbd_GSdkDH83jw")) {
-                        await launch(
-                            "https://www.youtube.com/channel/UC_8gbN7BrNbd_GSdkDH83jw");
+                      if (await canLaunchUrl(Uri.parse(
+                          "https://www.youtube.com/channel/UC_8gbN7BrNbd_GSdkDH83jw"))) {
+                        await launchUrl(Uri.parse(
+                            "https://www.youtube.com/channel/UC_8gbN7BrNbd_GSdkDH83jw"));
                       } else {
                         throw "Could not launch youtube";
                       }
@@ -93,8 +92,10 @@ class Footer extends StatelessWidget {
                     )),
                 IconButton(
                     onPressed: () async {
-                      if (await canLaunch("https://github.com/EESTECXanthi")) {
-                        await launch("https://github.com/EESTECXanthi");
+                      if (await canLaunchUrl(
+                          Uri.parse("https://github.com/EESTECXanthi"))) {
+                        await launchUrl(
+                            Uri.parse("https://github.com/EESTECXanthi"));
                       } else {
                         throw "Could not launch github";
                       }
@@ -122,12 +123,12 @@ class Footer extends StatelessWidget {
               center: LatLng(41.13968287960835, 24.893633084659307),
               zoom: 15.0,
             ),
-            layers: [
-              TileLayerOptions(
+            children: [
+              TileLayer(
                   urlTemplate:
                       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  subdomains: ["a", "b", "c"]),
-              MarkerLayerOptions(
+                  subdomains: const ["a", "b", "c"]),
+              MarkerLayer(
                 markers: [
                   Marker(
                     width: 80.0,

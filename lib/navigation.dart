@@ -1,5 +1,3 @@
-import 'package:flag/flag_enum.dart';
-import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,16 +56,16 @@ class Navigation extends StatelessWidget {
         return Center(
           child: DropdownButton<String>(
               value: lang,
-              hint: lang.contains("en")
-                  ? Flag.fromCode(FlagsCode.US, height: 2.h, width: 2.w)
-                  : Flag.fromCode(FlagsCode.GR, height: 2.h, width: 2.w),
+              hint: lang.contains("en") ? Text("🇺🇸") : Text("🇬🇷"),
               items: [
                 DropdownMenuItem(
-                  child: Flag.fromCode(FlagsCode.GR, height: 2.h, width: 2.w),
+                  child: Text(
+                    "🇬🇷",
+                  ),
                   value: "el",
                 ),
                 DropdownMenuItem(
-                  child: Flag.fromCode(FlagsCode.US, height: 2.h, width: 2.w),
+                  child: Text("🇺🇸"),
                   value: "en",
                 ),
               ],

@@ -132,17 +132,17 @@ class EventContainer extends StatelessWidget {
     return Column(
       children: [
         Image.asset("assets/events/" + event.image),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          child: Text(
-            "${event.name} Sponsors:",
-            style: TextStyle(
-              color: event.color,
-              fontWeight: FontWeight.bold,
-              fontSize: 4.w,
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(vertical: 10.h),
+        //   child: Text(
+        //     "${event.name} Sponsors:",
+        //     style: TextStyle(
+        //       color: event.color,
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 4.w,
+        //     ),
+        //   ),
+        // ),
         SponsorList(
           sponsors: event.sponsors,
           color: event.color,
