@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,6 +25,13 @@ class EventList extends StatelessWidget {
         final String filename = Uri.decodeFull(keys[0]).split('/').last;
         final parts = filename.split('_').toList();
         final color = Color(int.parse("0x${parts[3].substring(0, 8)}"));
+        String? externalLink;
+        try {
+          externalLink = "https://${parts[4]}";
+          externalLink = externalLink.replaceAll(".png", "");
+          externalLink = externalLink.replaceAll(".jpg", "");
+        } catch (_) {}
+
         var sponsorsKeys = rootkeys
             .where((dynamic key) =>
                 key.startsWith('assets/events/${index}_sponsor'))
@@ -94,6 +102,7 @@ class EventList extends StatelessWidget {
           image: filename,
           sponsors: primarySponsors,
           also: secondarySponsors,
+          externalLink: externalLink,
         );
         events.add(event);
         index++;
@@ -135,7 +144,20 @@ class EventContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset("assets/events/" + event.image),
+        GestureDetector(
+          child: Image.asset("assets/events/" + event.image),
+          onTap: () async {
+            final link = event.externalLink;
+            if (link == null) {
+              return;
+            }
+            if (await canLaunch(link)) {
+              await launch(link);
+            } else {
+              throw "Could not launch $link";
+            }
+          },
+        ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Text(
@@ -180,6 +202,7 @@ class EventModel {
   final String image;
   final List<CurrentEventSponsor> sponsors;
   final List<CurrentEventSponsor> also;
+  final String? externalLink;
 
   const EventModel({
     required this.color,
@@ -187,6 +210,7 @@ class EventModel {
     required this.image,
     this.also = const [],
     this.sponsors = const [],
+    this.externalLink,
   });
 }
 

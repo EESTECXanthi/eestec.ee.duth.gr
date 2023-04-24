@@ -50,5 +50,4 @@ flutter:
     - assets/gallery/
     - assets/annualTeams/
     - assets/board/
-    - assets/currentEvent/
   uses-material-design: true
