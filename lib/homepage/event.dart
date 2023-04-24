@@ -46,11 +46,15 @@ class EventList extends StatelessWidget {
 
           if (parts.length == 6) {
             link = parts[4];
-            desc = {
-              "greek": parts[5].substring(0, parts[5].length - 4),
-              "english": "todo",
-            };
           }
+
+          desc = {
+            "greek": await rootBundle
+                .loadString('assets/events/${parts[3]}.txt')
+                .catchError((_) => _),
+            // "greek": parts[5].substring(0, parts[5].length - 4),
+            "english": "todo",
+          };
 
           ///to cut the last 4 characters from the link
           /// it includes extentsions like (.png,.jpg)
