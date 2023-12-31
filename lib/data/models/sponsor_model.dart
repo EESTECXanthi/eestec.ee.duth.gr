@@ -5,8 +5,9 @@ class SponsorModel {
   final String name;
   final String link;
   final Image logo;
+  final String desc;
 
-  SponsorModel({required this.name, required this.link})
+  SponsorModel({required this.name, required this.link, required this.desc})
       : logo = Image.asset(
           "assets/sponsors/$name.png",
           height: 17.w,

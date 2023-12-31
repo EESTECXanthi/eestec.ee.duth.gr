@@ -1,5 +1,4 @@
-# EESTEC LC Xanthi- Official Website
+# [2021-2023] EESTEC LC Xanthi- Official Website
 
-
-This is the official website for EESTEC LC Xanthi.(enjoy)
+This is the official website for EESTEC LC Xanthi.
 
