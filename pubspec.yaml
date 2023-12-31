@@ -8,6 +8,7 @@ version: 1.0.2
 environment:
   sdk: ">=2.19.2 <3.0.0"
 
+
 dependencies:
   flutter_bloc: ^8.1.2
   carousel_slider: ^4.2.1
@@ -20,6 +21,7 @@ dependencies:
   url_launcher: ^6.1.10
   contained_tab_bar_view: ^0.8.0
   wave: ^0.2.0
+
   timelines: ^0.1.0
   markdown: ^7.0.2
   google_fonts: ^4.0.3
@@ -51,4 +53,5 @@ flutter:
     - assets/annualTeams/
     - assets/board/
     - assets/sponsors/
+
   uses-material-design: true

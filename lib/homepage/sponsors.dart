@@ -68,36 +68,60 @@ class SponsorList extends StatelessWidget {
                             },
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            for (int j = 0; j < sponsors[i].stars; j++)
-                              Icon(Icons.star, color: color),
-                            sponsors[i].desc != null
-                                ? GestureDetector(
-                                    onTap: () async {
-                                      await showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              content: LangText(
-                                                greek: sponsors[i]
-                                                        .desc?["greek"] ??
+                        Text(sponsors[i].name ?? "",
+                            style: TextStyle(color: color, fontSize: 2.w)),
+                        sponsors[i].desc != null
+                            ? GestureDetector(
+                                onTap: () async {
+                                  await showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          content: LangText(
+                                            greek: sponsors[i].desc?["greek"] ??
+                                                "",
+                                            english:
+                                                sponsors[i].desc?["english"] ??
                                                     "",
-                                                english: sponsors[i]
-                                                        .desc?["english"] ??
-                                                    "",
-                                              ),
-                                            );
-                                          });
-                                    },
-                                    child: const Icon(
-                                      Icons.info,
-                                      color: Colors.grey,
-                                    ))
-                                : const SizedBox.shrink(),
-                          ],
-                        )
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: const Icon(
+                                  Icons.info,
+                                  color: Colors.grey,
+                                ))
+                            : const SizedBox.shrink()
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     for (int j = 0; j < sponsors[i].stars; j++)
+                        //       Icon(Icons.star, color: color),
+                        //     sponsors[i].desc != null
+                        //         ? GestureDetector(
+                        //             onTap: () async {
+                        //               await showDialog(
+                        //                   context: context,
+                        //                   builder: (context) {
+                        //                     return AlertDialog(
+                        //                       content: LangText(
+                        //                         greek: sponsors[i]
+                        //                                 .desc?["greek"] ??
+                        //                             "",
+                        //                         english: sponsors[i]
+                        //                                 .desc?["english"] ??
+                        //                             "",
+                        //                       ),
+                        //                     );
+                        //                   });
+                        //             },
+                        //             child: const Icon(
+                        //               Icons.info,
+                        //               color: Colors.grey,
+                        //             ))
+                        //         : const SizedBox.shrink(),
+                        //   ],
+                        // )
                       ],
                     ),
                   )

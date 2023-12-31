@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:website/homepage/sponsors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,6 +25,13 @@ class EventList extends StatelessWidget {
         final String filename = Uri.decodeFull(keys[0]).split('/').last;
         final parts = filename.split('_').toList();
         final color = Color(int.parse("0x${parts[3].substring(0, 8)}"));
+        String? externalLink;
+        try {
+          externalLink = "https://${parts[4]}";
+          externalLink = externalLink.replaceAll(".png", "");
+          externalLink = externalLink.replaceAll(".jpg", "");
+        } catch (_) {}
+
         var sponsorsKeys = rootkeys
             .where((dynamic key) =>
                 key.startsWith('assets/events/${index}_sponsor'))
@@ -46,11 +54,15 @@ class EventList extends StatelessWidget {
 
           if (parts.length == 6) {
             link = parts[4];
-            desc = {
-              "greek": parts[5].substring(0, parts[5].length - 4),
-              "english": "todo",
-            };
           }
+
+          desc = {
+            "greek": await rootBundle
+                .loadString('assets/events/${parts[3]}.txt')
+                .catchError((_) => _),
+            // "greek": parts[5].substring(0, parts[5].length - 4),
+            "english": "todo",
+          };
 
           ///to cut the last 4 characters from the link
           /// it includes extentsions like (.png,.jpg)
@@ -90,6 +102,7 @@ class EventList extends StatelessWidget {
           image: filename,
           sponsors: primarySponsors,
           also: secondarySponsors,
+          externalLink: externalLink,
         );
         events.add(event);
         index++;
@@ -131,18 +144,31 @@ class EventContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset("assets/events/" + event.image),
-        // Padding(
-        //   padding: EdgeInsets.symmetric(vertical: 10.h),
-        //   child: Text(
-        //     "${event.name} Sponsors:",
-        //     style: TextStyle(
-        //       color: event.color,
-        //       fontWeight: FontWeight.bold,
-        //       fontSize: 4.w,
-        //     ),
-        //   ),
-        // ),
+        GestureDetector(
+          child: Image.asset("assets/events/" + event.image),
+          onTap: () async {
+            final link = event.externalLink;
+            if (link == null) {
+              return;
+            }
+            if (await canLaunch(link)) {
+              await launch(link);
+            } else {
+              throw "Could not launch $link";
+            }
+          },
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: Text(
+            "${event.name} Sponsors:",
+            style: TextStyle(
+              color: event.color,
+              fontWeight: FontWeight.bold,
+              fontSize: 4.w,
+            ),
+          ),
+        ),
         SponsorList(
           sponsors: event.sponsors,
           color: event.color,
@@ -176,6 +202,7 @@ class EventModel {
   final String image;
   final List<CurrentEventSponsor> sponsors;
   final List<CurrentEventSponsor> also;
+  final String? externalLink;
 
   const EventModel({
     required this.color,
@@ -183,6 +210,7 @@ class EventModel {
     required this.image,
     this.also = const [],
     this.sponsors = const [],
+    this.externalLink,
   });
 }
 
