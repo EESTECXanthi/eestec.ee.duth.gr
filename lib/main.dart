@@ -21,6 +21,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: const HomePage(),
           theme: ThemeData(
+            useMaterial3: false,
             textTheme: GoogleFonts.robotoTextTheme(
               Theme.of(context).textTheme,
             ),

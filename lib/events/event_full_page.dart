@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 // class EventFullPage extends StatelessWidget {
 //   const EventFullPage({Key? key}) : super(key: key);

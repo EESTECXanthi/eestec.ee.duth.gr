@@ -1,5 +1,4 @@
 //<year>_<position>_<english name>_<greek name>
-import 'package:flutter/material.dart';
 
 class BoardModel {
   final int year;

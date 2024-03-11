@@ -69,7 +69,7 @@ class Category {
   }
 
   Future<int> getNumberOfImages(Category category) async {
-    final imageTiles = <Widget>[];
+    // final imageTiles = <Widget>[];
     final galleryManifest = await loadGalleryManifest();
 
     final List<String> images = galleryManifest
@@ -80,7 +80,7 @@ class Category {
 
   Widget buildImageTile(String assetPath) {
     return Padding(
-      padding: EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(4.0),
       child: Image.asset(
         assetPath,
       ),

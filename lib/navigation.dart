@@ -3,9 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:website/about_eestec/about_eestec.dart';
 import 'package:website/about_us/about_us.dart';
-import 'package:website/article_page/article_page.dart';
 import 'package:website/bloc/lang.dart';
-import 'package:website/gallery/gallery_page.dart';
 import 'package:website/homepage/homepage.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';
@@ -56,8 +54,8 @@ class Navigation extends StatelessWidget {
         return Center(
           child: DropdownButton<String>(
               value: lang,
-              hint: lang.contains("en") ? Text("🇺🇸") : Text("🇬🇷"),
-              items: [
+              hint: lang.contains("en") ? const Text("🇺🇸") : const Text("🇬🇷"),
+              items: const [
                 DropdownMenuItem(
                   child: Text(
                     "🇬🇷",
@@ -114,7 +112,7 @@ class Navigation extends StatelessWidget {
         toolbarHeight: 16.h,
         title: SafeArea(
           child: GestureDetector(
-            onTap: () => _Action.pushEvent(context, HomePage()),
+            onTap: () => _Action.pushEvent(context, const HomePage()),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 6.h),
               child: Image.asset(
@@ -170,8 +168,8 @@ class _Action extends StatelessWidget {
             if (_push != null) {
               pushEvent(context, _push);
             } else if (_link != null) {
-              if (await canLaunch(_link)) {
-                await launch(_link);
+              if (await canLaunchUrl(Uri.parse(_link))) {
+                await launchUrl(Uri.parse(_link));
               } else {
                 throw "Could not launch $_link";
               }

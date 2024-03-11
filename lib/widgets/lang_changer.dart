@@ -31,5 +31,5 @@ class LangText extends StatelessWidget {
 }
 
 TextSpan getLangTextSpan({String? english, required String greek}) {
-  return TextSpan();
+  return const TextSpan();
 }

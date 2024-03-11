@@ -7,11 +7,11 @@ import 'package:website/widgets/lang_changer.dart';
 
 class SponsorList extends StatelessWidget {
   const SponsorList({
-    Key? key,
+    super.key,
     this.sponsors = const [],
     this.color = Colors.red,
     this.size = 1,
-  }) : super(key: key);
+  });
   final List<CurrentEventSponsor> sponsors;
   final Color color;
   final double size;
@@ -25,7 +25,7 @@ class SponsorList extends StatelessWidget {
               spacing: 2.w,
               children: [
                 for (int i = 0; i < sponsors.length; i++)
-                  Container(
+                  SizedBox(
                     width: 25.h,
                     child: Column(
                       children: [
@@ -35,14 +35,14 @@ class SponsorList extends StatelessWidget {
                             if (link == null) {
                               return;
                             }
-                            if (await canLaunch(link)) {
-                              await launch(link);
+                            if (await canLaunchUrl(Uri.parse(link))) {
+                              await launchUrl(Uri.parse(link));
                             } else {
                               throw "Could not launch $link";
                             }
                           },
                           child: ExtendedImage.asset(
-                            "assets/sponsors/${sponsors[i].image}",
+                            "assets/events/${sponsors[i].image}",
                             //fit: BoxFit.cover,
                             enableMemoryCache: true,
                             cacheRawData: true,

@@ -44,7 +44,7 @@ class Footer extends StatelessWidget {
                         throw "Could not launch instagram";
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       MdiIcons.instagram,
                       color: Colors.white,
                     )),
@@ -58,7 +58,7 @@ class Footer extends StatelessWidget {
                         throw "Could not launch facebook";
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       MdiIcons.facebook,
                       color: Colors.white,
                     )),
@@ -72,7 +72,7 @@ class Footer extends StatelessWidget {
                         throw "Could not launch linkedin";
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       MdiIcons.linkedin,
                       color: Colors.white,
                     )),
@@ -86,7 +86,7 @@ class Footer extends StatelessWidget {
                         throw "Could not launch youtube";
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       MdiIcons.youtube,
                       color: Colors.white,
                     )),
@@ -100,13 +100,13 @@ class Footer extends StatelessWidget {
                         throw "Could not launch github";
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       MdiIcons.github,
                       color: Colors.white,
                     )),
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(
+                    icon: Icon(
                       MdiIcons.mail,
                       color: Colors.white,
                     )),
@@ -134,7 +134,7 @@ class Footer extends StatelessWidget {
                     width: 80.0,
                     height: 80.0,
                     point: LatLng(41.13968287960835, 24.893633084659307),
-                    builder: (ctx) => Image.asset(
+                    child: Image.asset(
                       "assets/misc/pin.png",
                       //height: 10.h,
                       //width: 10.h,

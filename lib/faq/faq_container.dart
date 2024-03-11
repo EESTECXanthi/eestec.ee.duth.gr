@@ -1,8 +1,6 @@
-import 'package:dotted_line/dotted_line.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:timelines/timelines.dart';
 import 'package:website/responsive.dart';
 import 'package:website/widgets/lang_changer.dart';
 

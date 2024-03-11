@@ -29,8 +29,8 @@ class _ArticleListState extends State<ArticleList> {
           final subtitle = article.subtitle;
           return GestureDetector(
             onTap: () async {
-              if (await canLaunch(article.link)) {
-                await launch(article.link);
+              if (await canLaunchUrl(Uri.parse(article.link))) {
+                await launchUrl(Uri.parse(article.link));
               } else {
                 throw "Could not launch ${article.link}";
               }

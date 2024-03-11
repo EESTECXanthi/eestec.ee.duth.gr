@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:website/widgets/lang_changer.dart';
 
 class EventCategory {
   final String name;

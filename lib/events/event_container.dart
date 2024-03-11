@@ -1,6 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:website/events/event_catergory.dart';
 import 'package:website/responsive.dart';
 import 'package:sizer/sizer.dart';

@@ -1,8 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 import 'package:sizer/sizer.dart';
 import 'package:website/responsive.dart';
 import 'package:website/widgets/lang_changer.dart';
@@ -14,7 +12,7 @@ class AboutEestec extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var style = TextStyle(fontWeight: FontWeight.bold, fontSize: 1.5.w);
+    // var style = TextStyle(fontWeight: FontWeight.bold, fontSize: 1.5.w);
     return DefaultTabController(
       length: 3,
       child: Navigation(
@@ -94,8 +92,8 @@ class AboutEestec extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
               child: ElevatedButton(
                 onPressed: () async {
-                  if (await canLaunch("https://eestec.net/about")) {
-                    await launch("https://eestec.net/about");
+                  if (await canLaunchUrl(Uri.parse("https://eestec.net/about"))) {
+                    await launchUrl(Uri.parse("https://eestec.net/about"));
                   } else {
                     throw "Could not launch https://eestec.net/about";
                   }
